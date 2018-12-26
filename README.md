@@ -1,6 +1,6 @@
 # Generator Serverless
 
-[![NPM Badge](https://img.shields.io/npm/v/generator-serverless.svg)](https://www.npmjs.com/package/generator-sls)
+[![NPM Badge](https://img.shields.io/npm/v/generator-sls.svg)](https://www.npmjs.com/package/generator-sls)
 
 Yeoman generator for a lambda Serverless project
 
@@ -52,8 +52,7 @@ It creates the handler files
 TODO
 
 ### Project unit tests
-For every route created with the generator, a corresponding unit test template file is added
-in the `test` directory.
+For every route created with the generator, a corresponding basic unit test file is added.
 
 ## Features
 - Support of SAM 
@@ -62,7 +61,7 @@ in the `test` directory.
 
 ## Roadmap
 
+- Support of NodeJS
 - Support of different types of events for lambda function  
 - Simplifying local invoke/debug of lambda or apis (Support of SAM)
-- Support NodeJS
 - Orchestration and support of domains  
