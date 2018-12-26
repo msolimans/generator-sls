@@ -1,0 +1,50 @@
+{
+  "version": "0.0.1",
+  "license": "MIT",
+  "main": "index.js",
+  "name": "generator-sls",
+  "description": "Yeoman generator for creating serverless projects!",
+  "author": {
+    "name": "Muhammad Soliman",
+    "email": "contact@msoliman.me"
+  },
+  "bugs": {
+    "url": "https://github.com/msolimans/generator-sls/issues"
+  },
+  "contributors": [],
+  "dependencies": {
+    "html-wiring": "^1.2.0",
+    "to-case": "^2.0.0",
+    "ucfirst": "^1.0.0",
+    "yeoman-generator": "^0.24.1",
+    "yosay": "^1.2.0"
+  },
+  "devDependencies": {
+    "eslint": "^3.11.1",
+    "eslint-config-exaprint": "latest",
+    "mocha": "^3.0.2",
+    "yeoman-assert": "^2.2.1",
+    "yeoman-test": "^1.5.1"
+  },
+  "files": [
+    "generators/app",
+    "generators/route"
+  ],
+  "homepage": "https://github.com/exaprint/generator-sls#readme",
+  "keywords": [
+    "yeoman-generator",
+    "generator-sls",
+    "sls",
+    "nodejs",
+    "golang",
+    "lambda",
+    "aws"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/msolimans/generator-sls.git"
+  },
+  "scripts": {
+    "eslint": "eslint . --ext .js"
+  }
+}
