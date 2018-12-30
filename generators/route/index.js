@@ -37,6 +37,13 @@ function updateYamlFile(route, file) {
         `          method: ${route.method}\n` +
         '          cors: true\n';
 
+    // events:
+    //     - schedule: cron(0/2 * ? * MON-FRI *)
+    //every 2nd minute from Monday to Friday
+    //rate(value unit) (minute minutes hour hours day days)
+    //cron(Minutes Hours Day-of-month Month Day-of-week Year)
+    //https://github.com/serverless/examples/tree/master/aws-node-scheduled-cron
+
     if (file.indexOf(insert) === -1) {
         newFile = file.replace(hook, insert + hook);
     }
@@ -82,6 +89,7 @@ const serverGenerator = generators.Base.extend({
 
             // We prepare the prompst for each route
             this.routes.forEach((route) => {
+
                 prompts.push({
                     name: `method-${route.camelName}`,
                     type: 'list',
