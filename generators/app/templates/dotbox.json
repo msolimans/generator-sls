@@ -1,0 +1,150 @@
+{
+  "verbose": true,
+
+  "build": {
+    "async": true,
+    "tasks": [
+      {
+        "plugin": "plato",
+        "blocking": false,
+        "eslintrcPath": ".eslintrc.json",
+        "targets": [
+          "src"
+        ]
+      },
+      {
+        "plugin": "jsdoc",
+        "blocking": false,
+        "configFilePath": "./jsdoc.conf.json",
+        "templatePath": "./node_modules/ink-docstrap/template",
+        "readmePath": "./README.md",
+        "targets": [
+          "src"
+        ]
+      }
+    ]
+  },
+
+  "test": {
+    "tasks": [
+      {
+        "plugin": "mocha",
+        "useNyc": true
+      }
+    ]
+  },
+
+  "remote-test": {
+    "tasks": [
+      {
+        "plugin": "git-file-downloader",
+
+        "provider": "gitlab",
+        "repository": "<%= projectOwner %>/<%= projectName %>-config",
+        "file": "stage/config.json",
+        "branch": "master",
+        "output": ".",
+        "private_token": "$PRIVATE_TOKEN"
+      },
+      {
+        "plugin": "mocha",
+        "useNyc": true,
+        "nycReporters": [
+          "text-summary",
+          "html"
+        ]
+      }
+    ]
+  },
+
+  "lint": {
+    "tasks": [
+      {
+        "plugin": "nsp",
+        "blocking": false
+      },
+      {
+        "plugin": "eslint",
+        "targets": [
+          "src"
+        ]
+      }
+    ]
+  },
+
+  "restore-symlink": {
+    "tasks": [
+      {
+        "plugin": "symlink-resolver",
+        "function": "restore",
+        "links": ["config.json"]
+      }
+    ]
+  },
+
+  "offline": {
+    "tasks": [
+      {
+        "plugin": "serverless",
+        "slsFunction": "offline",
+        "removeNpmDevDependencies": false,
+        "restoreNpmDevDependencies": false,
+        "resolveSymlinks": [ "config.json"]
+      }
+    ]
+  },
+
+  "deploy": {
+    "tasks": [
+      {
+        "plugin": "serverless",
+        "slsFunction": "deploy",
+        "removeNpmDevDependencies": true,
+        "restoreNpmDevDependencies": true,
+        "resolveSymlinks": [
+          "config.json"
+        ],
+        "restoreSymlinks": true
+      }
+    ]
+  },
+
+  "remote-deploy": {
+    "tasks": [
+      {
+        "plugin": "git-file-downloader",
+
+        "provider": "gitlab",
+        "repository": "<%= projectOwner %>/<%= projectName %>-config",
+        "file": "$PROJECT_ENV/config.json",
+        "branch": "master",
+        "output": ".",
+        "private_token": "$PRIVATE_TOKEN"
+      },
+      {
+        "plugin": "serverless",
+        "slsFunction": "deploy",
+        "removeNpmDevDependencies": true
+      }
+    ]
+  },
+  "local": {
+    "tasks": [
+      {
+        "plugin": "sam",
+        "slsFunction": "local invoke Route1 --event route1/event.json"
+      }
+    ]
+  },
+  "undeploy": {
+    "tasks": [
+      {
+        "plugin": "serverless",
+        "slsFunction": "remove",
+        "removeNpmDevDependencies": false,
+        "restoreNpmDevDependencies": false
+      }
+    ]
+  }
+
+}

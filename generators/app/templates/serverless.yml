@@ -1,0 +1,33 @@
+service: <%= projectName %>
+
+frameworkVersion: ">=1.28.0 <2.0.0"
+
+package:
+ exclude:
+   - ./**
+ include:
+   - ./bin/**
+
+custom: ${file(./config.json)}
+
+provider:
+  name: aws
+  cfLogs: true
+  runtime: go1.x
+  stage: ${self:custom.env}
+  region: us-east-1
+  memorySize: 128
+  stackTags:
+    squad: Test
+
+plugins:
+  - serverless-sam
+
+functions:
+### yeoman hook ###
+## Don't touch this comment, the subgenerator needs it'
+
+## Uncomment for dev purpose only.
+## Re-comment it before deploy !!
+#plugins:
+#  - serverless-offline
