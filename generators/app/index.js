@@ -20,11 +20,14 @@ const serverGenerator = generators.Base.extend({
             return this.prompt([
                     {
                     name: 'language',
-                    type: 'input',
+                    type: 'list',
                     message: 'What is the runtime language?',
                     choices: [
                         'Golang',
                         'NodeJS',
+                        'DotNet',
+                        'Python',
+                        'Java'
                     ],
                     default: 'Golang'
                 },
