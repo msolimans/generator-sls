@@ -55,7 +55,6 @@ function updateMakeFile(route, file) {
     const hook = '### yeoman hook ###';
     let newFile = null;
     const insert = `	GOARCH=amd64 GOOS=linux go build -gcflags='-N -l' -o bin/${route.slugName} ${route.slugName}/main.go\n`;
-    //const insert = `  GOARCH=amd64 GOOS=linux go build -gcflags='-N -l' -o bin/${route.slugName} ${route.slugName}/main.go\n`;
 
     if (file.indexOf(insert) === -1) {
         newFile = file.replace(hook, insert + hook);
@@ -114,6 +113,21 @@ const serverGenerator = generators.Base.extend({
     writing: {
 
         routes() {
+
+            let slsAttributes = {};
+
+            if (this.options.language) {
+                slsAttributes.language = this.options.language;
+            } else {
+                const slsAttributesPath = this.destinationPath('slsattributes.json');
+                slsAttributes = fileReader.readFileAsString(slsAttributesPath);
+                slsAttributes = JSON.parse(slsAttributes);
+                if (!slsAttributes.language) {
+                    slsAttributes.language = "golang";
+                }
+            }
+
+
             // We get the serverless.yml file as a string
             const path = this.destinationPath('serverless.yml');
             let file = fileReader.readFileAsString(path);
@@ -129,58 +143,52 @@ const serverGenerator = generators.Base.extend({
                 ) {
                     this.log(`Route ${route.slugName} already exists`);
                 } else {
-                    // All good
-                    this.fs.copyTpl(
-                        this.templatePath('./../../app/templates/src/handlers/main.go'),
-                        this.destinationPath(`${route.slugName}/main.go`),
-                        {
-                            // fileName: route.slugName,
-                            // classBaseName: ucfirst(route.camelName)
-                        }
-                    );
+
+                    const root = `./../../route/${slsAttributes.language}/`;
 
                     this.fs.copyTpl(
-                        this.templatePath('./../../app/templates/src/handlers/event.json'),
+                        this.templatePath(`${root}/main.go`),
+                        this.destinationPath(`${route.slugName}/main.go`)
+                    );
+
+                    //unit test
+                    this.fs.copyTpl(
+                        this.templatePath(`${root}/main_test.go`),
+                        this.destinationPath(`${route.slugName}/main_test.go`)
+                    );
+
+                    //events
+                    this.fs.copyTpl(
+                        this.templatePath(`${root}/event.json`),
                         this.destinationPath(`${route.slugName}/event.json`)
                     );
 
                     file = updateYamlFile(route, file);
                     makeFile = updateMakeFile(route, makeFile);
                 }
-                // We add the unit test for the route
-                this.fs.copyTpl(
-                    this.templatePath('./../../app/templates/src/handlers/main_test.go'),
-                    this.destinationPath(`${route.slugName}/main_test.go`), {
-                        // fileName: route.slugName,
-                        // classBaseName: ucfirst(route.camelName)
-                    }
-                );
+
 
                 this.fs.copyTpl(
-                    this.templatePath('./../../route/Makefile'),
+                    this.templatePath(`\`${root}/Makefile`),
                     this.destinationPath(`${route.slugName}/Makefile`),
                     {
                         routeName: route.slugName
-                        // classBaseName: ucfirst(route.camelName)
                     }
                 );
 
             });
 
-            this.log("overwriting yaml!" + file);
-
-            // Once done we rewrite the serverless.yml file
+            // rewrite the serverless.yml
             this.write(path, file);
 
-
-            //makefile
+            //Makefile
             this.write(makePath, makeFile);
         },
     },
     sls2sam() {
         if (!this.options.__app) {
-            this.spawnCommand('make')
-            this.spawnCommand('sls', ['sam', 'export', ' --output', 'template.yml']);
+            //  this.spawnCommand('make')
+            // this.spawnCommand('sls', ['sam', 'export', ' --output', 'template.yml']);
         }
     }
 });
