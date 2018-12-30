@@ -51,8 +51,20 @@ function updateMakeFile(route, file) {
  * The route subgenerator
  */
 const serverGenerator = generators.Base.extend({
+    prompting: {
 
+        ask() {
 
+            return this.prompt([{
+                name: "unitTest",
+                message: "Unit Test Framework to be used?",
+                type: "list",
+                choices: ["Testify", "Convey"]
+            }]).then( (answers) => {
+                this.unitTest = answers.unitTest;
+            });
+        }
+    },
     writing: {
 
         routes() {
@@ -80,11 +92,20 @@ const serverGenerator = generators.Base.extend({
                     this.destinationPath(`${route.slugName}/main.go`)
                 );
 
-                //unit test
-                this.fs.copyTpl(
-                    this.templatePath(`${root}/main_test.go`),
-                    this.destinationPath(`${route.slugName}/main_test.go`)
-                );
+                if (this.unitTest === "Testify") {
+                    //unit test
+                    this.fs.copyTpl(
+                        this.templatePath(`${root}/main_test.go`),
+                        this.destinationPath(`${route.slugName}/main_test.go`)
+                    );
+                } else {
+                    //unit test
+                    this.fs.copyTpl(
+                        this.templatePath(`${root}/main_convey_test.go`),
+                        this.destinationPath(`${route.slugName}/main_test.go`)
+                    );
+                }
+
 
                 //events
                 this.fs.copyTpl(
