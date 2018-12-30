@@ -18,16 +18,16 @@ const serverGenerator = generators.Base.extend({
 
         ask() {
             return this.prompt([
-                //     {
-                //     name: 'language',
-                //     type: 'input',
-                //     message: 'What is the runtime language?',
-                //     choices: [
-                //         'Go1.x',
-                //         'NodeJs',
-                //     ],
-                //     default: 'Go1.x'
-                // },
+                    {
+                    name: 'language',
+                    type: 'input',
+                    message: 'What is the runtime language?',
+                    choices: [
+                        'Golang',
+                        'NodeJS',
+                    ],
+                    default: 'Golang'
+                },
                 {
                     name: 'projectName',
                     type: 'input',
@@ -60,7 +60,7 @@ const serverGenerator = generators.Base.extend({
                     store: true,
                 },
             ]).then((answers) => {
-                //this.language = answers.language;
+                this.language = answers.language.toLowerCase();
                 this.projectName = answers.projectName;
                 this.projectOwner = answers.projectOwner;
                 this.projectDescription = answers.projectDescription;
@@ -72,21 +72,23 @@ const serverGenerator = generators.Base.extend({
     },
 
     writing: {
+
         git() {
+
             //todo: change gitattributes!
             this.fs.copy(
-                this.templatePath('gitattributes'),
+                this.templatePath(`${this.language}/gitattributes`),
                 this.destinationPath('.gitattributes')
             );
             this.fs.copy(
-                this.templatePath('gitignore'),
+                this.templatePath(`${this.language}/gitignore`),
                 this.destinationPath('.gitignore')
             );
         },
 
         readMe() {
             this.fs.copyTpl(
-                this.templatePath('README.md'),
+                this.templatePath(`${this.language}/README.md`),
                 this.destinationPath('README.md'), {
                     projectName: this.projectName,
                     projectDescription: this.projectDescription,
@@ -96,7 +98,7 @@ const serverGenerator = generators.Base.extend({
 
         packageJSON() {
             this.fs.copyTpl(
-                this.templatePath('package.json'),
+                this.templatePath(`${this.language}/package.json`),
                 this.destinationPath('package.json'), {
                     projectName: this.projectName,
                     projectDescription: this.projectDescription,
@@ -108,7 +110,7 @@ const serverGenerator = generators.Base.extend({
         },
         serverlessYaml() {
             this.fs.copyTpl(
-                this.templatePath('serverless.yml'),
+                this.templatePath(`${this.language}/serverless.yml`),
                 this.destinationPath('serverless.yml'), {
                     projectName: this.projectName,
                 }
@@ -116,13 +118,13 @@ const serverGenerator = generators.Base.extend({
         },
         makeFile() {
             this.fs.copyTpl(
-                this.templatePath('Makefile'),
+                this.templatePath(`${this.language}/Makefile`),
                 this.destinationPath('Makefile'), {}
             )
         },
         gomod() {
             this.fs.copyTpl(
-                this.templatePath('gomod.sh'),
+                this.templatePath(`${this.language}/gomod.sh`),
                 this.destinationPath('gomod.sh')
             )
         },
@@ -138,13 +140,19 @@ const serverGenerator = generators.Base.extend({
 
         config() {
             this.fs.copy(
-                this.templatePath('config.json'),
+                this.templatePath(`${this.language}/config.json`),
                 this.destinationPath('config.json')
             );
+
+            this.fs.copy(
+                this.templatePath(`${this.language}/slsattributes.json`),
+                this.destinationPath('slsattributes.json')
+            );
+
         },
         vscode() {
             this.fs.copy(
-                this.templatePath('./../../app/templates/launch.json'),
+                this.templatePath(`./../../app/templates/${this.language}/launch.json`),
                 this.destinationPath('.vscode/launch.json')
             )
         },
@@ -152,12 +160,12 @@ const serverGenerator = generators.Base.extend({
     },
     scripts() {
         this.fs.copy(
-            this.templatePath('./../../app/templates/scripts'),
+            this.templatePath(`./../../app/templates/scripts`),
             this.destinationPath('scripts')
         )
     },
     install() {
-        this.composeWith('sls:route', {options: {__app: true}});
+        this.composeWith('sls:route', {options: {__app: true, language: this.language}});
         this.npmInstall();
     },
 
@@ -166,7 +174,7 @@ const serverGenerator = generators.Base.extend({
         //this.spawnCommand('sls', ['sam', 'export', ' --output', 'template.yml']);
 
         this.log(
-            yosay('Your project has been set up! \n Thanks and see you soon!')
+            yosay(`Your ${this.language} project has been successfully set up, Happy Coding!!`)
         );
     },
 });
