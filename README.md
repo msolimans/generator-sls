@@ -69,7 +69,7 @@ For every route created with the generator, a corresponding basic unit test file
 - Simplifying local invoke/debug of lambda or apis (Support of SAM)
 - Orchestration and support of domains  
 - Deployment using (Terraform, Amplify, SAM, Apex, or Serverless)
-- Support of IDEs (Visual Studio Code, Intellij, PyCharm, WebStorm, and Goland)
+- Auto generate scripts for simplifying serverless development in different IDEs (Visual Studio Code, Intellij, PyCharm, WebStorm, and Goland)
 - Choose Unit test framework to be used
 
 
