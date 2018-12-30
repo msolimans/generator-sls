@@ -7,7 +7,7 @@ Yeoman generator for a lambda Serverless project
 
 ## Requirements
 
-* Go 1.x 
+* Language of choice (Go 1.11, Python 2.7+, NodeJS 6+, .NET Core 2+, Java 8) 
 * Yeoman >= V1.8.5
 
 ## Generator installation
@@ -61,10 +61,11 @@ For every route created with the generator, a corresponding basic unit test file
 
 ## Roadmap
 
-- Support of Go
+- Support of Go  
 - Support of NodeJS
 - Support of Python 
 - Support of Java 
+- Support of C# 
 - Support of different types of events for lambda function  
 - Simplifying local invoke/debug of lambda or apis (Support of SAM)
 - Orchestration and support of domains  
