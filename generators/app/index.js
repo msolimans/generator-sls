@@ -18,7 +18,7 @@ const serverGenerator = generators.Base.extend({
 
         ask() {
             return this.prompt([
-                    {
+                {
                     name: 'language',
                     type: 'list',
                     message: 'What is the runtime language?',
@@ -30,8 +30,7 @@ const serverGenerator = generators.Base.extend({
                         'Java'
                     ],
                     default: 'Golang'
-                },
-                {
+                }, {
                     name: 'projectName',
                     type: 'input',
                     message: 'What is the project name:',
@@ -77,6 +76,8 @@ const serverGenerator = generators.Base.extend({
     writing: {
 
         git() {
+
+            this.log(this.templatePath(`${this.language}/gitattributes`))
 
             //todo: change gitattributes!
             this.fs.copy(
@@ -125,11 +126,36 @@ const serverGenerator = generators.Base.extend({
                 this.destinationPath('Makefile'), {}
             )
         },
-        gomod() {
-            this.fs.copyTpl(
-                this.templatePath(`${this.language}/gomod.sh`),
-                this.destinationPath('gomod.sh')
-            )
+        build() {
+            this.log("SSSSSSS "+ this.language);
+
+            switch (this.language) {
+                case "golang":
+                    this.fs.copy(
+                        this.templatePath(`${this.language}/gomod.sh`),
+                        this.destinationPath('gomod.sh')
+                    );
+                    break;
+                case "dotnet":
+
+                    this.fs.copy(
+                        this.templatePath(`${this.language}/aws-csharp.csproj`),
+                        this.destinationPath('aws-csharp.csproj')
+                    );
+
+                    this.fs.copy(
+                        this.templatePath(`${this.language}/build.sh`),
+                        this.destinationPath('build.sh')
+                    );
+
+                    this.fs.copy(
+                        this.templatePath(`${this.language}/build.cmd`),
+                        this.destinationPath('build.cmd')
+                    );
+
+                    break;
+
+            }
         },
 
         //   dotbox() {
