@@ -74,128 +74,15 @@ const serverGenerator = generators.Base.extend({
     },
 
     writing: {
-
-        git() {
-
-            this.log(this.templatePath(`${this.language}/gitattributes`))
-
-            //todo: change gitattributes!
-            this.fs.copy(
-                this.templatePath(`${this.language}/gitattributes`),
-                this.destinationPath('.gitattributes')
-            );
-            this.fs.copy(
-                this.templatePath(`${this.language}/gitignore`),
-                this.destinationPath('.gitignore')
-            );
-        },
-
-        readMe() {
-            this.fs.copyTpl(
-                this.templatePath(`${this.language}/README.md`),
-                this.destinationPath('README.md'), {
-                    projectName: this.projectName,
-                    projectDescription: this.projectDescription,
-                }
-            );
-        },
-
-        packageJSON() {
-            this.fs.copyTpl(
-                this.templatePath(`${this.language}/package.json`),
-                this.destinationPath('package.json'), {
-                    projectName: this.projectName,
-                    projectDescription: this.projectDescription,
-                    projectVersion: this.projectVersion,
-                    authorName: this.authorName,
-                    authorEmail: this.authorEmail,
-                }
-            );
-        },
-        serverlessYaml() {
-            this.fs.copyTpl(
-                this.templatePath(`${this.language}/serverless.yml`),
-                this.destinationPath('serverless.yml'), {
-                    projectName: this.projectName,
-                }
-            );
-        },
-        makeFile() {
-            this.fs.copyTpl(
-                this.templatePath(`${this.language}/Makefile`),
-                this.destinationPath('Makefile'), {}
-            )
-        },
         build() {
-            this.log("SSSSSSS "+ this.language);
-
-            switch (this.language) {
-                case "golang":
-                    this.fs.copy(
-                        this.templatePath(`${this.language}/gomod.sh`),
-                        this.destinationPath('gomod.sh')
-                    );
-                    break;
-                case "dotnet":
-
-                    this.fs.copy(
-                        this.templatePath(`${this.language}/aws-csharp.csproj`),
-                        this.destinationPath('aws-csharp.csproj')
-                    );
-
-                    this.fs.copy(
-                        this.templatePath(`${this.language}/build.sh`),
-                        this.destinationPath('build.sh')
-                    );
-
-                    this.fs.copy(
-                        this.templatePath(`${this.language}/build.cmd`),
-                        this.destinationPath('build.cmd')
-                    );
-
-                    break;
-
-            }
-        },
-
-        //   dotbox() {
-        // this.fs.copyTpl(
-        //   this.templatePath('dotbox.json'),
-        //   this.destinationPath('.dotbox.json'), {
-        //     projectName: this.projectName,
-        //     projectOwner: this.projectOwner,
-        //   }
-        // );
-
-        config() {
-            this.fs.copy(
-                this.templatePath(`${this.language}/config.json`),
-                this.destinationPath('config.json')
-            );
-
-            this.fs.copy(
-                this.templatePath(`${this.language}/slsattributes.json`),
-                this.destinationPath('slsattributes.json')
-            );
-
-        },
-        vscode() {
-            this.fs.copy(
-                this.templatePath(`./../../app/templates/${this.language}/launch.json`),
-                this.destinationPath('.vscode/launch.json')
-            )
-        },
-
+            this.composeWith(`sls:a${this.language}`, {options: {props: this}});
+        }
     },
     scripts() {
         this.fs.copy(
             this.templatePath(`./../../app/templates/scripts`),
             this.destinationPath('scripts')
         )
-    },
-    install() {
-        this.composeWith('sls:route', {options: {__app: true, language: this.language}});
-        this.npmInstall();
     },
 
     end() {
