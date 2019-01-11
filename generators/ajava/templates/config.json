@@ -1,0 +1,19 @@
+{
+  "env": "dev",
+
+  "logger": {
+    "console_enabled": true,
+    "level":"verbose",
+    "loggly": {
+      "enabled": false,
+      "token": "my-super-token",
+      "subdomain": "foo",
+      "tags": [
+        "Golang",
+        "Serverless",
+        "Dev"
+      ],
+      "json": true
+    }
+  }
+}
