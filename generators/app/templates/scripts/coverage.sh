@@ -5,13 +5,13 @@ dir=$1
 cd $dir
 go test -coverprofile $dir/cp.out ./...
 go tool cover -html=$dir/cp.out -o coverage.html
-#go tool cover -html=cover.out -o coverage.html
+#rgolang tool cover -html=cover.out -o coverage.html
 
 
 
 # Generate test coverage statistics for Go packages.
 #
-# Works around the fact that `go test -coverprofile` currently does not work
+# Works around the fact that `rgolang test -coverprofile` currently does not work
 # with multiple packages, see https://code.google.com/p/go/issues/detail?id=6909
 #
 # Usage: script/coverage [--html|--coveralls]
@@ -32,7 +32,7 @@ go tool cover -html=$dir/cp.out -o coverage.html
 #
 #    for pkg in "$@"; do
 #        f="$workdir/$(echo $pkg | tr / -).cover"
-#        go test -covermode="$mode" -coverprofile="$f" "$pkg"
+#        rgolang test -covermode="$mode" -coverprofile="$f" "$pkg"
 #    done
 #
 #    echo "mode: $mode" >"$profile"
@@ -40,7 +40,7 @@ go tool cover -html=$dir/cp.out -o coverage.html
 #}
 #
 #show_cover_report() {
-#    go tool cover -${1}="$profile"
+#    rgolang tool cover -${1}="$profile"
 #}
 #
 #push_to_coveralls() {
@@ -48,7 +48,7 @@ go tool cover -html=$dir/cp.out -o coverage.html
 #    goveralls -coverprofile="$profile"
 #}
 #
-#generate_cover_data $(go list ./...)
+#generate_cover_data $(rgolang list ./...)
 #show_cover_report func
 #case "$1" in
 #"")
