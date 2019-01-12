@@ -1,6 +1,7 @@
 # Generator Serverless
 
 [![NPM Badge](https://img.shields.io/npm/v/generator-sls.svg)](https://www.npmjs.com/package/generator-sls)
+![](https://img.shields.io/github/license/msolimans/generator-sls.svg)
 
 Yeoman generator for a lambda Serverless project
 
