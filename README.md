@@ -4,7 +4,10 @@
 ![](https://img.shields.io/github/license/msolimans/generator-sls.svg)
 [![](https://img.shields.io/github/languages/count/msolimans/generator-sls.svg)](https://github.com/msolimans/generator-sls/search?l=JSON)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/12d543d7665b42c0b072141276012dd2)](https://www.codacy.com/app/msolimans/generator-sls?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=msolimans/generator-sls&amp;utm_campaign=Badge_Grade)
-![https://gitter.im/generator-sls/community#](https://img.shields.io/gitter/room/generator-sls/generator-sls.svg)
+[![](https://img.shields.io/gitter/room/generator-sls/community.svg)](https://gitter.im/generator-sls/community#)
+
+
+
 
 
 Yeoman generator for a lambda Serverless project
