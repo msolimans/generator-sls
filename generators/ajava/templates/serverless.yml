@@ -5,10 +5,9 @@ custom: ${file(./config.json)}
 provider:
   name: aws
   runtime: java8
-
-# you can overwrite defaults here
-#  stage: dev
-#  region: us-east-1
+  stage: ${opt:stage, self:custom.env}
+  region: us-east-1
+  memorySize: 128
 
 # you can add statements to the Lambda function's IAM Role here
 #  iamRoleStatements:

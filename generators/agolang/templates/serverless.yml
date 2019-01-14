@@ -14,7 +14,7 @@ provider:
   name: aws
   cfLogs: true
   runtime: go1.x
-  stage: ${self:custom.env}
+  stage: ${opt:stage, self:custom.env}
   region: us-east-1
   memorySize: 128
   stackTags:
