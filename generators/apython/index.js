@@ -1,6 +1,6 @@
-'use strict';
+"use strict";
 
-const generators = require('yeoman-generator');
+const generators = require("yeoman-generator");
 
 /**
  * Python generator
@@ -14,7 +14,7 @@ const serverGenerator = generators.Base.extend({
     },
 
     install() {
-        //this.composeWith('sls:route', {options: {__app: true, language: this.language}});
+        //this.composeWith("sls:route", {options: {__app: true, language: this.language}});
         //this.npmInstall();
     },
 
