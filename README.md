@@ -7,7 +7,6 @@
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/12d543d7665b42c0b072141276012dd2)](https://www.codacy.com/app/msolimans/generator-sls?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=msolimans/generator-sls&amp;utm_campaign=Badge_Grade)
 [![](https://img.shields.io/gitter/room/generator-sls/community.svg)](https://gitter.im/generator-sls/community#)
 
-
 Yeoman generator for a lambda Serverless project
 
 ## Requirements
@@ -33,7 +32,7 @@ npm i -g generator-sls
 
 Once the link established, you can use it right away.
 Create a new directory where you want your project to be and run it:
-```
+```bash
 mkdir lambda-service
 cd lambda-service
 yo sls
@@ -45,7 +44,7 @@ You now have a starter skeleton for a lambda project!
 ### Sub-generator
 
 After creating project/service, you can easily add a function/route by using the subgenerator. In the root directory of your project, run:
-```
+```bash
 yo sls:route
 ```
 Just like the base generator, it will prompt you to give the function(s) name(s).
@@ -78,7 +77,7 @@ For every route created with the generator, a corresponding basic unit test file
 *   Auto generate scripts for simplifying serverless development in different IDEs (Visual Studio Code, Intellij, PyCharm, WebStorm, and Goland)
 *   Choose Unit test framework to be used
 
-## Resources:
+## Resources
 
 *   <https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/serverless-sam-cli-using-debugging-golang.html>
 *   <https://github.com/awslabs/aws-sam-cli/issues/326>

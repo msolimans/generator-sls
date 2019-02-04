@@ -40,7 +40,7 @@ const serverGenerator = generators.Base.extend({
                     name: "projectOwner",
                     type: "input",
                     message: "What is the git project owner (owner/repository):",
-                    filter: answer => to.slug(answer)
+                    filter: (answer) => to.slug(answer)
                 }, {
                     name: "projectDescription",
                     type: "input",
