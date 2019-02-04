@@ -1,6 +1,6 @@
-'use strict';
+"use strict";
 
-const generators = require('yeoman-generator');
+const generators = require("yeoman-generator");
 
 /**
  * Java Generator
@@ -12,19 +12,19 @@ const serverGenerator = generators.Base.extend({
 
         git() {
             this.fs.copy(
-                this.templatePath(`gitattributes`),
-                this.destinationPath('.gitattributes')
+                this.templatePath("gitattributes"),
+                this.destinationPath(".gitattributes")
             );
             this.fs.copy(
-                this.templatePath(`gitignore`),
-                this.destinationPath('.gitignore')
+                this.templatePath("gitignore"),
+                this.destinationPath(".gitignore")
             );
         },
 
         readMe() {
             this.fs.copyTpl(
-                this.templatePath(`README.md`),
-                this.destinationPath('README.md'), {
+                this.templatePath("README.md"),
+                this.destinationPath("README.md"), {
                     projectName: this.options.props.projectName,
                     projectDescription: this.options.props.projectDescription,
                 }
@@ -34,16 +34,16 @@ const serverGenerator = generators.Base.extend({
 
         serverlessYaml() {
             this.fs.copyTpl(
-                this.templatePath(`serverless.yml`),
-                this.destinationPath('serverless.yml'), {
+                this.templatePath("serverless.yml"),
+                this.destinationPath("serverless.yml"), {
                     projectName: this.options.props.projectName,
                 }
             );
         },
         makeFile() {
             this.fs.copy(
-                this.templatePath(`Makefile`),
-                this.destinationPath('Makefile')
+                this.templatePath("Makefile"),
+                this.destinationPath("Makefile")
             )
         },
 
@@ -51,28 +51,28 @@ const serverGenerator = generators.Base.extend({
 
             //gradle
             this.fs.copy(
-                this.templatePath(`gradle`),
-                this.destinationPath('gradle')
+                this.templatePath("gradle"),
+                this.destinationPath("gradle")
             );
 
             this.fs.copy(
-                this.templatePath(`gradlew`),
-                this.destinationPath('gradlew')
+                this.templatePath("gradlew"),
+                this.destinationPath("gradlew")
             );
 
             this.fs.copy(
-                this.templatePath(`gradlew.bat`),
-                this.destinationPath('gradlew.bat')
+                this.templatePath("gradlew.bat"),
+                this.destinationPath("gradlew.bat")
             );
 
             this.fs.copy(
-                this.templatePath(`build.sh`),
-                this.destinationPath('build.sh')
+                this.templatePath("build.sh"),
+                this.destinationPath("build.sh")
             );
 
             this.fs.copyTpl(
-                this.templatePath(`build.gradle`),
-                this.destinationPath('build.gradle'), {
+                this.templatePath("build.gradle"),
+                this.destinationPath("build.gradle"), {
                     projectName: this.options.props.projectName
                 }
             )
@@ -80,19 +80,19 @@ const serverGenerator = generators.Base.extend({
 
         config() {
             this.fs.copy(
-                this.templatePath(`config.json`),
-                this.destinationPath('config.json')
+                this.templatePath("config.json"),
+                this.destinationPath("config.json")
             );
 
             this.fs.copy(
-                this.templatePath(`slsattributes.json`),
-                this.destinationPath('slsattributes.json')
+                this.templatePath("slsattributes.json"),
+                this.destinationPath("slsattributes.json")
             );
         },
     },
 
     install() {
-        this.composeWith('sls:route', {options: {__app: this.options.props.__app, language: 'java'}});
+        this.composeWith("sls:route", {options: {__app: this.options.props.__app, language: "java"}});
     },
 
 
