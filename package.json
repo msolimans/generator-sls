@@ -8,6 +8,12 @@
     "name": "Muhammad Soliman",
     "email": "contact@msoliman.me"
   },
+  "eslintConfig": {
+    "env": {
+      "node": true,
+      "es6": true
+    }
+  },
   "bugs": {
     "url": "https://github.com/msolimans/generator-sls/issues"
   },

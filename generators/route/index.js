@@ -7,17 +7,15 @@ const fileReader = require("html-wiring");
 /**
  * Generates the different types of names for our routes
  * @param {String} routeName Route Name
- * @return {Array} Route objetcs
+ * @return {{camelName: *, name: String, slugName: *, pascalName: *}} Route objetcs
  */
 const genRoutesNames = (routeName) => {
-    const routeNames = {
+    return {
         name: routeName,
         slugName: to.slug(routeName),
         pascalName: to.pascal(routeName),
         camelName: to.camel(routeName),
     };
-
-    return routeNames;
 };
 
 /**
@@ -32,7 +30,7 @@ const serverGenerator = generators.Base.extend({
                 name: "routes",
                 type: "input",
                 message: "Route(s) name(s): (singular or comma separated)",
-                filter: answer => answer.split(","),
+                filter: (answer) => answer.split(","),
                 default: "route1, route2",
             },
             ]).then((answers) => {

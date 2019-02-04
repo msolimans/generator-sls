@@ -8,11 +8,7 @@
 [![](https://img.shields.io/gitter/room/generator-sls/community.svg)](https://gitter.im/generator-sls/community#)
 
 
-
-
-
 Yeoman generator for a lambda Serverless project
-
 
 ## Requirements
 
