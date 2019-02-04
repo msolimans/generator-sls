@@ -91,7 +91,7 @@ const serverGenerator = generators.Base.extend({
             this.fs.copy(
                 this.templatePath("launch.json"),
                 this.destinationPath(".vscode/launch.json")
-            )
+            );
         },
 
     },

@@ -44,7 +44,7 @@ const serverGenerator = generators.Base.extend({
             this.fs.copy(
                 this.templatePath("Makefile"),
                 this.destinationPath("Makefile")
-            )
+            );
         },
 
         build() {
@@ -75,7 +75,7 @@ const serverGenerator = generators.Base.extend({
                 this.destinationPath("build.gradle"), {
                     projectName: this.options.props.projectName
                 }
-            )
+            );
         },
 
         config() {

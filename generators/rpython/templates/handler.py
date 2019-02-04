@@ -12,8 +12,6 @@ def handler(event, context):
         "body": json.dumps(body)
     }
 
-    return response
-
     # Use this code if you don't use the http event with the LAMBDA-PROXY
     # integration
     """
@@ -22,3 +20,5 @@ def handler(event, context):
         "event": event
     }
     """
+
+    return response

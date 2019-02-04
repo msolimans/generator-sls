@@ -60,31 +60,31 @@ TODO
 For every route created with the generator, a corresponding basic unit test file is added.
 
 ## Features
-- Support of SAM 
-- Support of Serverless 
-- Local Invoke/Debug 
+*  Support of SAM 
+*  Support of Serverless 
+*  Local Invoke/Debug 
 
 ## Roadmap
 
-- Support of Go  
-- Support of NodeJS
-- Support of Python 
-- Support of Java 
-- Support of C# 
-- Support of different types of events for lambda function  
-- Simplifying local invoke/debug of lambda or apis (Support of SAM)
-- Orchestration and support of domains  
-- Deployment using (Terraform, Amplify, SAM, Apex, or Serverless)
-- Auto generate scripts for simplifying serverless development in different IDEs (Visual Studio Code, Intellij, PyCharm, WebStorm, and Goland)
-- Choose Unit test framework to be used
+*  Support of Go  
+*  Support of NodeJS
+*  Support of Python 
+*  Support of Java 
+*  Support of C# 
+*  Support of different types of events for lambda function  
+*  Simplifying local invoke/debug of lambda or apis (Support of SAM)
+*  Orchestration and support of domains  
+*  Deployment using (Terraform, Amplify, SAM, Apex, or Serverless)
+*  Auto generate scripts for simplifying serverless development in different IDEs (Visual Studio Code, Intellij, PyCharm, WebStorm, and Goland)
+*  Choose Unit test framework to be used
 
 
 Resources:
 
-- https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/serverless-sam-cli-using-debugging-golang.html
-- https://github.com/awslabs/aws-sam-cli/issues/326
-- https://github.com/awslabs/aws-sam-cli
-- https://github.com/Microsoft/vscode-go/wiki/Debugging-Go-code-using-VS-Code
-- https://github.com/sapessi/serverless-sam
-- https://github.com/awslabs/aws-amplify-serverless-plugin/blob/master/example/serverless.yml
-- https://code.visualstudio.com/docs/editor/variables-reference
+*  <https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/serverless-sam-cli-using-debugging-golang.html>
+*  <https://github.com/awslabs/aws-sam-cli/issues/326>
+*  <https://github.com/awslabs/aws-sam-cli>
+*  <https://github.com/Microsoft/vscode-go/wiki/Debugging-Go-code-using-VS-Code>
+*  <https://github.com/sapessi/serverless-sam>
+*  <https://github.com/awslabs/aws-amplify-serverless-plugin/blob/master/example/serverless.yml>
+*  <https://code.visualstudio.com/docs/editor/variables-reference>

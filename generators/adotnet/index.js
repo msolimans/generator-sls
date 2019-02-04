@@ -64,7 +64,7 @@ const serverGenerator = generators.Base.extend({
             this.fs.copyTpl(
                 this.templatePath("Makefile"),
                 this.destinationPath("Makefile"), {}
-            )
+            );
         },
         build() {
 
@@ -105,7 +105,7 @@ const serverGenerator = generators.Base.extend({
             this.fs.copy(
                 this.templatePath("launch.json"),
                 this.destinationPath(".vscode/launch.json")
-            )
+            );
         },
 
     },
