@@ -1,7 +1,7 @@
-'use strict';
+"use strict";
 
-const generators = require('yeoman-generator');
-const fileReader = require('html-wiring');
+const generators = require("yeoman-generator");
+const fileReader = require("html-wiring");
 
 /**
  * Updates the serverless.yml file with the new routes
@@ -10,15 +10,16 @@ const fileReader = require('html-wiring');
  * @return {String} Our modified version of the input file
  */
 function updateYamlFile(route, file) {
-    const hook = '### yeoman hook ###';
+    //route.method => event
+    const hook = "### yeoman hook ###";
     let newFile = null;
     const insert = `  ${route.slugName}:\n` +
         `    handler: bin/${route.slugName}\n` +
-        '    events:\n' +
-        '      - http:\n' +
+        "    events:\n" +
+        "      - http:\n" +
         `          path: ${route.slugName}\n` +
         `          method: ${route.method}\n` +
-        '          cors: true\n';
+        "          cors: true\n";
 
     // events:
     //     - schedule: cron(0/2 * ? * MON-FRI *)
@@ -35,9 +36,9 @@ function updateYamlFile(route, file) {
 }
 
 function updateMakeFile(route, file) {
-    const hook = '### yeoman hook ###';
+    const hook = "### yeoman hook ###";
     let newFile = null;
-    const insert = `	GOARCH=amd64 GOOS=linux go build -gcflags='-N -l' -o bin/${route.slugName} ${route.slugName}/main.go\n`;
+    const insert = `	GOARCH=amd64 GOOS=linux go build -gcflags="-N -l" -o bin/${route.slugName} ${route.slugName}/main.go\n`;
 
     if (file.indexOf(insert) === -1) {
         newFile = file.replace(hook, insert + hook);
@@ -70,16 +71,16 @@ const serverGenerator = generators.Base.extend({
         routes() {
 
             // We get the serverless.yml file as a string
-            const path = this.destinationPath('serverless.yml');
+            const path = this.destinationPath("serverless.yml");
             let file = fileReader.readFileAsString(path);
 
-            const makePath = this.destinationPath('Makefile');
+            const makePath = this.destinationPath("Makefile");
             let makeFile = fileReader.readFileAsString(makePath);
 
 
             // We process each route
             this.options.routes.forEach((route) => {
-                // We check the route doesn't already exists
+                // We check the route doesn"t already exists
                 if (this.fs.exists(this.destinationPath(`${route.slugName}/main.go`))) {
                     this.log(`Route ${route.slugName} already exists`);
                     return;
@@ -136,8 +137,8 @@ const serverGenerator = generators.Base.extend({
     },
     sls2sam() {
         if (!this.options.__app) {
-            //  this.spawnCommand('make')
-            // this.spawnCommand('sls', ['sam', 'export', ' --output', 'template.yml']);
+            //  this.spawnCommand("make")
+            // this.spawnCommand("sls", ["sam", "export", " --output", "template.yml"]);
         }
     }
 });
