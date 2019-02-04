@@ -1,8 +1,8 @@
-'use strict';
+"use strict";
 
 
-const yosay = require('yosay');
-const generators = require('yeoman-generator');
+const yosay = require("yosay");
+const generators = require("yeoman-generator");
 
 /**
  * DotNet Generator
@@ -14,26 +14,26 @@ const serverGenerator = generators.Base.extend({
 
         welcome() {
             this.log(yosay(
-                'Ready for Dotnet, Start writing ....'
+                "Ready for Dotnet, Start writing ...."
             ));
         },
 
 
         git() {
             this.fs.copy(
-                this.templatePath(`gitattributes`),
-                this.destinationPath('.gitattributes')
+                this.templatePath("gitattributes"),
+                this.destinationPath(".gitattributes")
             );
             this.fs.copy(
-                this.templatePath(`gitignore`),
-                this.destinationPath('.gitignore')
+                this.templatePath("gitignore"),
+                this.destinationPath(".gitignore")
             );
         },
 
         readMe() {
             this.fs.copyTpl(
-                this.templatePath(`README.md`),
-                this.destinationPath('README.md'), {
+                this.templatePath("README.md"),
+                this.destinationPath("README.md"), {
                     projectName: this.options.props.projectName,
                     projectDescription: this.options.props.projectDescription,
                 }
@@ -42,8 +42,8 @@ const serverGenerator = generators.Base.extend({
 
         packageJSON() {
             this.fs.copyTpl(
-                this.templatePath(`package.json`),
-                this.destinationPath('package.json'), {
+                this.templatePath("package.json"),
+                this.destinationPath("package.json"), {
                     projectName: this.options.props.projectName,
                     projectDescription: this.options.props.projectDescription,
                     projectVersion: this.options.props.projectVersion,
@@ -54,16 +54,16 @@ const serverGenerator = generators.Base.extend({
         },
         serverlessYaml() {
             this.fs.copyTpl(
-                this.templatePath(`serverless.yml`),
-                this.destinationPath('serverless.yml'), {
+                this.templatePath("serverless.yml"),
+                this.destinationPath("serverless.yml"), {
                     projectName: this.options.props.projectName,
                 }
             );
         },
         makeFile() {
             this.fs.copyTpl(
-                this.templatePath(`Makefile`),
-                this.destinationPath('Makefile'), {}
+                this.templatePath("Makefile"),
+                this.destinationPath("Makefile"), {}
             )
         },
         build() {
@@ -71,18 +71,18 @@ const serverGenerator = generators.Base.extend({
 
 
             this.fs.copy(
-                this.templatePath(`aws-csharp.csproj`),
-                this.destinationPath('aws-csharp.csproj')
+                this.templatePath("aws-csharp.csproj"),
+                this.destinationPath("aws-csharp.csproj")
             );
 
             this.fs.copy(
-                this.templatePath(`build.sh`),
-                this.destinationPath('build.sh')
+                this.templatePath("build.sh"),
+                this.destinationPath("build.sh")
             );
 
             this.fs.copy(
-                this.templatePath(`build.cmd`),
-                this.destinationPath('build.cmd')
+                this.templatePath("build.cmd"),
+                this.destinationPath("build.cmd")
             );
 
 
@@ -91,27 +91,27 @@ const serverGenerator = generators.Base.extend({
 
         config() {
             this.fs.copy(
-                this.templatePath(`config.json`),
-                this.destinationPath('config.json')
+                this.templatePath("config.json"),
+                this.destinationPath("config.json")
             );
 
             this.fs.copy(
-                this.templatePath(`slsattributes.json`),
-                this.destinationPath('slsattributes.json')
+                this.templatePath("slsattributes.json"),
+                this.destinationPath("slsattributes.json")
             );
 
         },
         vscode() {
             this.fs.copy(
-                this.templatePath(`launch.json`),
-                this.destinationPath('.vscode/launch.json')
+                this.templatePath("launch.json"),
+                this.destinationPath(".vscode/launch.json")
             )
         },
 
     },
 
     install() {
-        this.composeWith('sls:route', {options: {__app: this.options.__app, language: 'dotnet'}});
+        this.composeWith("sls:route", {options: {__app: this.options.__app, language: "dotnet"}});
         this.npmInstall();
     },
 
