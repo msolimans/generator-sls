@@ -1,7 +1,7 @@
-'use strict';
+"use strict";
 
-const generators = require('yeoman-generator');
-const fileReader = require('html-wiring');
+const generators = require("yeoman-generator");
+const fileReader = require("html-wiring");
 
 /**
  * Updates the serverless.yml file with the new routes
@@ -10,15 +10,15 @@ const fileReader = require('html-wiring');
  * @return {String} Our modified version of the input file
  */
 function updateYamlFile(route, file) {
-    const hook = '### yeoman hook ###';
+    const hook = "### yeoman hook ###";
     let newFile = null;
     const insert = `  ${route.slugName}:\n` +
         `    handler: ${route.slugName}.handler\n` +
-        '    events:\n' +
-        '      - http:\n' +
+        "    events:\n" +
+        "      - http:\n" +
         `          path: ${route.slugName}\n` +
         `          method: ${route.method}\n` +
-        '          cors: true\n';
+        "          cors: true\n";
 
     // events:
     //     - schedule: cron(0/2 * ? * MON-FRI *)
@@ -49,12 +49,12 @@ const serverGenerator = generators.Base.extend({
             const dstRoot = `serverless.yml`;
 
             // We get the serverless.yml file as a string
-            const path = this.destinationPath('serverless.yml');
+            const path = this.destinationPath("serverless.yml");
             let file = fileReader.readFileAsString(path);
 
             // We process each route
             this.options.routes.forEach((route) => {
-                // We check the route doesn't already exists
+                // We check the route doesn"t already exists
                 if (this.fs.exists(this.destinationPath(`${dstRoot}/${route.pascalName}.py`))) {
                     this.log(`Route exists, ${route.slugName}.py already exists!`);
                     return;
@@ -84,8 +84,8 @@ const serverGenerator = generators.Base.extend({
     },
     sls2sam() {
         if (!this.options.__app) {
-            //  this.spawnCommand('make')
-            // this.spawnCommand('sls', ['sam', 'export', ' --output', 'template.yml']);
+            //  this.spawnCommand("make")
+            // this.spawnCommand("sls", ["sam", "export", " --output", "template.yml"]);
         }
     }
 });
