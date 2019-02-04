@@ -52,6 +52,14 @@ const serverGenerator = generators.Base.extend({
             const path = this.destinationPath("serverless.yml");
             let file = fileReader.readFileAsString(path);
 
+            if (!this.fs.exists(this.destinationPath(`${dstRoot}/__init__.py`))) {
+                this.fs.copyTpl(
+                    this.templatePath(`${root}/__init__.py`),
+                    this.destinationPath(`${dstRoot}/__init__.py`), {
+                    }
+                );
+            }
+
             // We process each route
             this.options.routes.forEach((route) => {
                 // We check the route doesn"t already exists
@@ -59,6 +67,7 @@ const serverGenerator = generators.Base.extend({
                     this.log(`Route exists, ${route.slugName}.py already exists!`);
                     return;
                 }
+
 
                 this.fs.copyTpl(
                     this.templatePath(`${root}/handler.py`),
