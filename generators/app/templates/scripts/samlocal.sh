@@ -8,7 +8,7 @@ cd ${dir}
 #build the function
 make
 cd ..
-echo "Running SAM inside directory `pwd`..."
+echo "Running SAM inside directory `pwd`"
 sam sls export --output template.yaml
 func="$(tr '[:lower:]' '[:upper:]' <<< ${func:0:1})${func:1}"
 
