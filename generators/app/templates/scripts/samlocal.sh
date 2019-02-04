@@ -5,10 +5,11 @@ func=$2
 debug=$3
 
 cd ${dir}
+#build the function
+make
 cd ..
-echo "Running SAM inside directory `pwd`"
-echo "dd $debug "
-
+echo "Running SAM inside directory `pwd`..."
+sam sls export --output template.yaml
 func="$(tr '[:lower:]' '[:upper:]' <<< ${func:0:1})${func:1}"
 
 if [ ${debug} ]; then
