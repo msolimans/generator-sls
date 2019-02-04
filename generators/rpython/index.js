@@ -44,9 +44,9 @@ const serverGenerator = generators.Base.extend({
 
         routes() {
 
-            const root = `.`;
+            const root = ".";
 
-            const dstRoot = `serverless.yml`;
+            const dstRoot = "serverless.yml";
 
             // We get the serverless.yml file as a string
             const path = this.destinationPath("serverless.yml");

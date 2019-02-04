@@ -1,8 +1,8 @@
-'use strict';
+"use strict";
 
-const to = require('to-case');
-const generators = require('yeoman-generator');
-const fileReader = require('html-wiring');
+const to = require("to-case");
+const generators = require("yeoman-generator");
+const fileReader = require("html-wiring");
 
 /**
  * Generates the different types of names for our routes
@@ -11,6 +11,7 @@ const fileReader = require('html-wiring');
  */
 const genRoutesNames = (routeName) => {
     const routeNames = {
+        name: routeName,
         slugName: to.slug(routeName),
         pascalName: to.pascal(routeName),
         camelName: to.camel(routeName),
@@ -28,11 +29,11 @@ const serverGenerator = generators.Base.extend({
 
         ask() {
             return this.prompt([{
-                name: 'routes',
-                type: 'input',
-                message: 'Route(s) name(s): (singular or comma separated)',
-                filter: answer => answer.split(','),
-                default: 'route1, route2',
+                name: "routes",
+                type: "input",
+                message: "Route(s) name(s): (singular or comma separated)",
+                filter: answer => answer.split(","),
+                default: "route1, route2",
             },
             ]).then((answers) => {
                 this.routes = answers.routes.map(genRoutesNames);
@@ -46,15 +47,17 @@ const serverGenerator = generators.Base.extend({
 
                 prompts.push({
                     name: `method-${route.camelName}`,
-                    type: 'list',
+                    type: "list",
                     message: `Route ${route.slugName} method:`,
                     choices: [
-                        'get',
-                        'post',
-                        'put',
-                        'delete',
+                        "get",
+                        "post",
+                        "put",
+                        "delete",
+                        "cron",
+                        "none",
                     ],
-                    default: 'get',
+                    default: "get",
                 });
             });
 
@@ -74,7 +77,7 @@ const serverGenerator = generators.Base.extend({
             if (this.options.language) {
                 slsAttributes.language = this.options.language;
             } else {
-                const slsAttributesPath = this.destinationPath('slsattributes.json');
+                const slsAttributesPath = this.destinationPath("slsattributes.json");
                 slsAttributes = fileReader.readFileAsString(slsAttributesPath);
                 slsAttributes = JSON.parse(slsAttributes);
                 if (!slsAttributes.language) {
@@ -94,8 +97,8 @@ const serverGenerator = generators.Base.extend({
     },
     sls2sam() {
         if (!this.options.__app) {
-            //  this.spawnCommand('make')
-            // this.spawnCommand('sls', ['sam', 'export', ' --output', 'template.yml']);
+            //  this.spawnCommand("make")
+            // this.spawnCommand("sls", ["sam", "export", " --output", "template.yml"]);
         }
     }
 });

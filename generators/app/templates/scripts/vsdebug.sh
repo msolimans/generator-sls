@@ -7,7 +7,7 @@ fi
 
 cd ${path}
 
-echo '{
+echo "{
     // Use IntelliSense to learn about possible attributes.
     // Hover to view descriptions of existing attributes.
     // For more information, visit: https://rgolang.microsoft.com/fwlink/?linkid=830387
@@ -29,4 +29,4 @@ echo '{
 
 
     ]
-}' > launch1.json
+}" > launch1.json

@@ -44,18 +44,18 @@ const serverGenerator = generators.Base.extend({
 
         routes() {
 
-            const root = `.`;
+            const root = ".";
 
-            const dstRoot = `src/main/java/com/serverless`;
+            const dstRoot = "src/main/java/com/serverless";
 
             // We get the serverless.yml file as a string
             const path = this.destinationPath("serverless.yml");
             let file = fileReader.readFileAsString(path);
 
-            if (!this.fs.exists(this.destinationPath(`src`))) {
+            if (!this.fs.exists(this.destinationPath("src"))) {
                 this.fs.copy(
                     this.templatePath(`${root}/src`),
-                    this.destinationPath(`src`)
+                    this.destinationPath("src")
                 );
             }
 

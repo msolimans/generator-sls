@@ -80,11 +80,11 @@ const serverGenerator = generators.Base.extend({
                     return;
                 }
 
-                const root = `.`;
+                const root = ".";
 
-                if (!this.fs.exists(this.destinationPath(`Main.cs`))) {
+                if (!this.fs.exists(this.destinationPath("Main.cs"))) {
                     this.fs.copy(this.templatePath(`${root}/Main.cs`),
-                        this.destinationPath(`Main.cs`)
+                        this.destinationPath("Main.cs")
                     );
                 }
 

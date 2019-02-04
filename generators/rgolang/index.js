@@ -86,7 +86,7 @@ const serverGenerator = generators.Base.extend({
                     return;
                 }
 
-                const root = `.`;
+                const root = ".";
 
                 this.fs.copy(
                     this.templatePath(`${root}/main.go`),

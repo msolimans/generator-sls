@@ -6,4 +6,4 @@ if [ ! -f package.json ]; then
 fi
 
 npm install --save-dev $2
-sls plugin install --name '${2}'
+sls plugin install --name "${2}"
