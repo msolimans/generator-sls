@@ -82,9 +82,9 @@ For every route created with the generator, a corresponding basic unit test file
 ## Resources:
 
 *   <https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/serverless-sam-cli-using-debugging-golang.html>
-* <https://github.com/awslabs/aws-sam-cli/issues/326>
-* <https://github.com/awslabs/aws-sam-cli>
-* <https://github.com/Microsoft/vscode-go/wiki/Debugging-Go-code-using-VS-Code>
-* <https://github.com/sapessi/serverless-sam>
-* <https://github.com/awslabs/aws-amplify-serverless-plugin/blob/master/example/serverless.yml>
-* <https://code.visualstudio.com/docs/editor/variables-reference>
+*   <https://github.com/awslabs/aws-sam-cli/issues/326>
+*   <https://github.com/awslabs/aws-sam-cli>
+*   <https://github.com/Microsoft/vscode-go/wiki/Debugging-Go-code-using-VS-Code>
+*   <https://github.com/sapessi/serverless-sam>
+*   <https://github.com/awslabs/aws-amplify-serverless-plugin/blob/master/example/serverless.yml>
+*   <https://code.visualstudio.com/docs/editor/variables-reference>
