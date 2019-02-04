@@ -78,7 +78,6 @@ For every route created with the generator, a corresponding basic unit test file
 *   Auto generate scripts for simplifying serverless development in different IDEs (Visual Studio Code, Intellij, PyCharm, WebStorm, and Goland)
 *   Choose Unit test framework to be used
 
-
 ## Resources:
 
 *   <https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/serverless-sam-cli-using-debugging-golang.html>
