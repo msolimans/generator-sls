@@ -13,7 +13,7 @@ function updateYamlFile(route, file) {
     const hook = '### yeoman hook ###';
     let newFile = null;
     const insert = `  ${route.slugName}:\n` +
-        `    handler: com.serverless.${route.pascalName}Handler\n` +
+        `    handler: ${route.slugName}.handler\n` +
         '    events:\n' +
         '      - http:\n' +
         `          path: ${route.slugName}\n` +
@@ -46,31 +46,23 @@ const serverGenerator = generators.Base.extend({
 
             const root = `.`;
 
-            const dstRoot = `src/main/java/com/serverless`;
+            const dstRoot = `serverless.yml`;
 
             // We get the serverless.yml file as a string
             const path = this.destinationPath('serverless.yml');
             let file = fileReader.readFileAsString(path);
 
-            if (!this.fs.exists(this.destinationPath(`src`))) {
-                this.fs.copy(
-                    this.templatePath(`${root}/src`),
-                    this.destinationPath(`src`)
-                );
-            }
-
             // We process each route
             this.options.routes.forEach((route) => {
                 // We check the route doesn't already exists
-                if (this.fs.exists(this.destinationPath(`${dstRoot}/${route.pascalName}Handler.java`))) {
-                    this.log(`Route exists, ${route.pascalName}Handler.java already exists`);
+                if (this.fs.exists(this.destinationPath(`${dstRoot}/${route.pascalName}.py`))) {
+                    this.log(`Route exists, ${route.slugName}.py already exists!`);
                     return;
                 }
 
                 this.fs.copyTpl(
-                    this.templatePath(`${root}/Handler.java`),
-                    this.destinationPath(`${dstRoot}/${route.pascalName}Handler.java`), {
-                        Prefix: route.pascalName
+                    this.templatePath(`${root}/handler.py`),
+                    this.destinationPath(`${dstRoot}/${route.pascalName}.py`), {
                     }
                 );
 
