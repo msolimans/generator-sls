@@ -53,7 +53,7 @@ const serverGenerator = generators.Base.extend({
             let file = fileReader.readFileAsString(path);
 
             const initFile = this.destinationPath(`${dstRoot}/__init__.py`);
-            if (!this.fs.exists(initFile)) {
+            if (!this.fs.exists.apply(initFile)) {
                 this.fs.copyTpl(
                     this.templatePath(`${root}/__init__.py`),
                     this.destinationPath(`${dstRoot}/__init__.py`), {
