@@ -52,7 +52,8 @@ const serverGenerator = generators.Base.extend({
             const path = this.destinationPath("serverless.yml");
             let file = fileReader.readFileAsString(path);
 
-            if (!this.fs.exists(this.destinationPath(`${dstRoot}/__init__.py`))) {
+            const initFile = this.destinationPath(`${dstRoot}/__init__.py`);
+            if (!this.fs.exists(initFile)) {
                 this.fs.copyTpl(
                     this.templatePath(`${root}/__init__.py`),
                     this.destinationPath(`${dstRoot}/__init__.py`), {
