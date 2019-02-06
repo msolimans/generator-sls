@@ -5,9 +5,7 @@
       "label": "gowsdl",
       "type": "shell",
       "command": "echo  ${input:componentType}",
-      "problemMatcher": [],
-
-
+      "problemMatcher": []
     }
   ],
   "inputs": [
