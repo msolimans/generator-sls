@@ -1,0 +1,6 @@
+# Convert text file line endings to lf
+* text=auto
+*.py python
+# Denote all files that are truly binary and should not be modified.
+*.mp4 binary
+*.jpg binary
