@@ -12,6 +12,7 @@
 
 # Sensitive or high-churn files
 .idea
+.DS_Store
 
 # Gradle
 .idea/**/gradle.xml
