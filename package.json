@@ -33,11 +33,7 @@
     "yeoman-assert": "^2.2.1",
     "yeoman-test": "^1.5.1"
   },
-  "files": [
-    "generators/app",
-    "generators/route"
-  ],
-  "homepage": "https://github.com/exaprint/generator-sls#readme",
+  "homepage": "https://github.com/msolimans/generator-sls#readme",
   "keywords": [
     "yeoman-generator",
     "generator-sls",
