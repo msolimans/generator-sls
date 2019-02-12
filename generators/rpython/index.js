@@ -46,14 +46,14 @@ const serverGenerator = generators.Base.extend({
 
             const root = ".";
 
-            const dstRoot = "serverless.yml";
+            const dstRoot = ".";
 
             // We get the serverless.yml file as a string
-            const path = this.destinationPath("serverless.yml");
+            const path = this.destinationPath(`${dstRoot}/serverless.yml`);
             let file = fileReader.readFileAsString(path);
 
             const initFile = this.destinationPath(`${dstRoot}/__init__.py`);
-            if (!this.fs.exists.apply(initFile)) {
+            if (!this.fs.exists(initFile)) {
                 this.fs.copyTpl(
                     this.templatePath(`${root}/__init__.py`),
                     this.destinationPath(`${dstRoot}/__init__.py`), {
@@ -72,7 +72,7 @@ const serverGenerator = generators.Base.extend({
 
                 this.fs.copyTpl(
                     this.templatePath(`${root}/handler.py`),
-                    this.destinationPath(`${dstRoot}/${route.pascalName}.py`), {
+                    this.destinationPath(`${dstRoot}/${route.slugName}.py`), {
                     }
                 );
 
@@ -94,8 +94,8 @@ const serverGenerator = generators.Base.extend({
     },
     sls2sam() {
         if (!this.options.__app) {
-            //  this.spawnCommand("make")
-            // this.spawnCommand("sls", ["sam", "export", " --output", "template.yml"]);
+             this.spawnCommand("make")
+            this.spawnCommand("sls", ["sam", "export", " --output", "template.yml"]);
         }
     }
 });
