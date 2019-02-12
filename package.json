@@ -22,13 +22,16 @@
     "html-wiring": "^1.2.0",
     "to-case": "^2.0.0",
     "ucfirst": "^1.0.0",
-    "yeoman-generator": "^0.24.1",
+    "yeoman-generator": "^3.2.0",
     "yosay": "^1.2.0"
   },
   "devDependencies": {
+    "deep-extend": ">=0.5.1",
     "eslint": "^3.11.1",
     "eslint-config-exaprint": "latest",
-    "mocha": "^3.0.2",
+    "growl": ">=1.10.0",
+    "lodash": ">=4.17.5",
+    "mocha": "^5.2.0",
     "yeoman-assert": "^2.2.1",
     "yeoman-test": "^1.5.1"
   },
