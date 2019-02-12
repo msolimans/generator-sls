@@ -28,6 +28,7 @@
   "devDependencies": {
     "eslint": "^3.11.1",
     "eslint-config-exaprint": "latest",
+    "npm-release": "^1.0.0",
     "mocha": "^3.0.2",
     "yeoman-assert": "^2.2.1",
     "yeoman-test": "^1.5.1"
