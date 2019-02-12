@@ -54,7 +54,7 @@ provider:
 #    - exclude-me.py
 #    - exclude-me-dir/**
 
-plugisns:
+plugins:
   - serverless-sam
 ## Uncomment for dev purpose only. Re-comment it before deploy !!
 #  - serverless-offline
