@@ -56,8 +56,7 @@ const serverGenerator = generators.Base.extend({
             if (!this.fs.exists(initFile)) {
                 this.fs.copyTpl(
                     this.templatePath(`${root}/__init__.py`),
-                    this.destinationPath(`${dstRoot}/__init__.py`), {
-                    }
+                    this.destinationPath(`${dstRoot}/__init__.py`), {}
                 );
             }
 
@@ -72,8 +71,7 @@ const serverGenerator = generators.Base.extend({
 
                 this.fs.copyTpl(
                     this.templatePath(`${root}/handler.py`),
-                    this.destinationPath(`${dstRoot}/${route.slugName}.py`), {
-                    }
+                    this.destinationPath(`${dstRoot}/${route.slugName}.py`), {}
                 );
 
                 //events
@@ -94,8 +92,8 @@ const serverGenerator = generators.Base.extend({
     },
     sls2sam() {
         if (!this.options.__app) {
-             this.spawnCommand("make")
-            this.spawnCommand("sls", ["sam", "export", " --output", "template.yml"]);
+
+            // this.spawnCommand("sls", ["sam", "export", " --output", "template.yml"]);
         }
     }
 });
