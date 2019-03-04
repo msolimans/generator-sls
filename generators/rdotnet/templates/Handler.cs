@@ -10,7 +10,7 @@ namespace AwsDotnetCsharp
 {
     public class <%=Prefix%>Handler
     {
-       public <%=Prefix%>Response Run(<%=Prefix%>Request request)
+       public APIGatewayProxyResponse Run(<%=Prefix%>Request request)
        {
          return new APIGatewayProxyResponse
                    {
