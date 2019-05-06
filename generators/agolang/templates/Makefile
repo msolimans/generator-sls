@@ -4,6 +4,7 @@ build: gomodgen
 	export GO111MODULE=on
 ### yeoman hook ###
 ## Don't touch this comment, the subgenerator needs it'
+    rm -rf .serverless/<%=projectName%>.zip && zip .serverless/<%=projectName%>.zip bin/*
 
 clean:
 	rm -rf ./bin ./vendor Gopkg.lock
