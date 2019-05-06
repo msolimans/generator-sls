@@ -7,24 +7,21 @@ fi
 
 cd ${path}
 
-echo "{
-    // Use IntelliSense to learn about possible attributes.
-    // Hover to view descriptions of existing attributes.
-    // For more information, visit: https://rgolang.microsoft.com/fwlink/?linkid=830387
-    'version': '0.2.0',
-    'configurations': [
-        {
-                'name': 'Connect to Lambda container',
-                'type': 'rgolang',
-                'request': 'launch',
-                'mode': 'remote',
-                'remotePath': '',
-                'port': 8997,
-                'host': '127.0.0.1',
-                'program': '${workspaceRoot}',
-                'env': {},
-                'args': [],
-                'apiVersion': 1
-        }
+echo '{
+    "version": "0.2.0",
+    "configurations": [
+    {
+        "name": "Connect to Lambda container",
+        "type": "go",
+        "request": "launch",
+        "mode": "remote",
+        "remotePath": "",
+        "port": 8997,
+        "host": "127.0.0.1",
+        "program": "${workspaceRoot}",
+        "apiVersion": 1,
+        "env": {},
+        "args": [],
+      },
     ]
-}" > launch.json
+  }' > launch.json
