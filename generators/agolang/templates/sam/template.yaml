@@ -11,17 +11,10 @@ Globals:
     Timeout: 5
 
 Resources:
+### yeoman hook ###
+## Don't touch this comment, the subgenerator needs it'
 
 
 Outputs:
-  HelloWorldAPI:
-    Description: "API Gateway endpoint URL for Prod environment for First Function"
-    Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/hello/"
-
-  HelloWorldFunction:
-    Description: "First Lambda Function ARN"
-    Value: !GetAtt HelloWorldFunction.Arn
-
-  HelloWorldFunctionIamRole:
-    Description: "Implicit IAM Role created for Hello World function"
-    Value: !GetAtt HelloWorldFunctionRole.Arn
+### output yeoman hook ###
+## Don't touch this comment, the subgenerator needs it'
