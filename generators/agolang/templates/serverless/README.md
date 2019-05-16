@@ -35,7 +35,7 @@ Not supported by Serverless framework itself, however we wired this up with `lam
 
 ## Continuous Integration
 
-### Test with mocha
+### Unit Test 
 
 ```bash
     $ make test
