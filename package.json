@@ -26,6 +26,7 @@
     "yosay": "^1.2.0"
   },
   "devDependencies": {
+    "release-it": "*",
     "deep-extend": ">=0.5.1",
     "eslint": "^3.11.1",
     "eslint-config-exaprint": "latest",
@@ -50,6 +51,7 @@
     "url": "git+https://github.com/msolimans/generator-sls.git"
   },
   "scripts": {
-    "eslint": "eslint . --ext .js"
+    "eslint": "eslint . --ext .js",
+    "release": "release-it"
   }
 }
