@@ -3,7 +3,7 @@
 const Frameworks = {
     sam: "sam",
     serverless: "serverless",
-    getYamlFile: function (framework) {
+    getYamlFile(framework) {
         switch (framework.toLowerCase()) {
             case this.serverless:
                 return "serverless.yml";

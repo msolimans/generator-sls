@@ -17,7 +17,7 @@ Yeoman generator for a lambda Serverless project
 ## Generator installation
  
 1) you are going to need [Yeoman](http://yeoman.io/):
-```
+```bash
 npm install -g yo
 ```
 2) Install the generator:

@@ -28,10 +28,9 @@ Debugging is easier than you might think. Run the following command, it will cre
     $ make network=services_default func=Create event=create/event.json sam-debug
 ```
 
-- `func` specified in capital case `Create`
-- `event` path to the event file 
-- `network` is a docker network you need inside which you need to run your lambda as container
-
+-   `func` specified in capital case `Create`
+-   `event` path to the event file 
+-   `network` is a docker network you need inside which you need to run your lambda as container
 
 ### Deploy project remotely
 
@@ -58,4 +57,3 @@ Debugging is easier than you might think. Run the following command, it will cre
 ```bash
     $ make test
 ```
-
