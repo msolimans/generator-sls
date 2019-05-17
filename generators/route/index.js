@@ -3,6 +3,9 @@
 const to = require("to-case");
 const generators = require("yeoman-generator");
 const fileReader = require("html-wiring");
+const frameworks = require("../../common/frameworks");
+const languages = require("../../common/languages");
+
 
 /**
  * Generates the different types of names for our routes
@@ -72,15 +75,28 @@ const serverGenerator = generators.Base.extend({
 
             let slsAttributes = {};
 
-            if (this.options.language) {
-                slsAttributes.language = this.options.language;
-            } else {
+            if (!this.options.language || !this.options.framework) {
                 const slsAttributesPath = this.destinationPath("slsattributes.json");
+
                 slsAttributes = fileReader.readFileAsString(slsAttributesPath);
                 slsAttributes = JSON.parse(slsAttributes);
-                if (!slsAttributes.language) {
-                    slsAttributes.language = "golang";
+
+                //language
+                if (!this.options.language && !slsAttributes.language) {
+                    slsAttributes.language = languages.golang;
+                } else if (this.options.language) {
+                    slsAttributes.language = this.options.language;
                 }
+
+                //framework
+                if (!this.options.framework && !slsAttributes.framework) {
+                    slsAttributes.framework = frameworks.sam;
+                } else if (this.options.framework) {
+                    slsAttributes.framework = this.options.framework;
+                }
+            } else {
+                slsAttributes.language = this.options.language;
+                slsAttributes.framework = this.options.framework;
             }
 
             this.composeWith(`sls:r${slsAttributes.language}`,
@@ -88,6 +104,7 @@ const serverGenerator = generators.Base.extend({
                     options: {
                         __app: this.options.__app,
                         language: slsAttributes.language,
+                        framework: slsAttributes.framework,
                         routes: this.routes
                     }
                 });
@@ -96,7 +113,7 @@ const serverGenerator = generators.Base.extend({
     sls2sam() {
         if (!this.options.__app) {
             //  this.spawnCommand("make")
-            // this.spawnCommand("sls", ["sam", "export", " --output", "template.yml"]);
+            // this.spawnCommand("serverless", ["sam", "export", " --output", "template.yml"]);
         }
     }
 });
