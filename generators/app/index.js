@@ -36,45 +36,29 @@ const serverGenerator = generators.Base.extend({
                     message: "What is the project name:",
                     filter: (answer) => to.slug(answer),
                     default: path.basename(this.destinationPath()),
-                }, {
-                    name: "projectOwner",
-                    type: "input",
-                    message: "What is the git project owner (owner/repository):",
-                    filter: (answer) => to.slug(answer)
-                }, {
-                    name: "projectDescription",
-                    type: "input",
-                    message: "Enter the project description:",
-                }, {
-                    name: "projectVersion",
-                    type: "input",
-                    message: "Version:",
-                    default: "0.1.0",
-                }, {
-                    name: "authorName",
-                    type: "input",
-                    message: "Author name:",
-                    store: true,
-                }, {
-                    name: "authorEmail",
-                    type: "input",
-                    message: "Author email: ",
-                    store: true,
                 },
+                {
+                    name: "framework",
+                    type: "list",
+                    message: "Which framework would you like to use?",
+                    choices: [
+                        "SAM",
+                        "Serverless"
+                    ],
+                    default: "SAM"
+                },
+
             ]).then((answers) => {
                 this.language = answers.language.toLowerCase();
                 this.projectName = answers.projectName;
-                this.projectOwner = answers.projectOwner;
-                this.projectDescription = answers.projectDescription;
-                this.projectVersion = answers.projectVersion;
-                this.authorName = answers.authorName;
-                this.authorEmail = answers.authorEmail;
+                this.framework = answers.framework;
             });
         },
     },
 
     writing: {
         build() {
+           
             this.composeWith(`sls:a${this.language}`, {options: {props: this}});
         }
     },
@@ -86,8 +70,8 @@ const serverGenerator = generators.Base.extend({
     },
 
     end() {
-        //this.spawnCommand("sls", ["plugin", "install", "--name", "serverless-sam"]);
-        //this.spawnCommand("sls", ["sam", "export", " --output", "template.yml"]);
+        //this.spawnCommand("serverless", ["plugin", "install", "--name", "serverless-sam"]);
+        //this.spawnCommand("serverless", ["sam", "export", " --output", "template.yml"]);
 
         this.log(
             yosay(`Your ${this.language} project has been successfully set up, Happy Coding!!`)
