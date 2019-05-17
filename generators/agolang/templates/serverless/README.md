@@ -11,8 +11,10 @@ Not supported by Serverless framework itself, however we wired this up with `lam
 ```bash
     #Start local API in port 3000
     $ make local-api 
-    #OR invoke function
-    $ make func=funcName event=/path/to/event.json invoke
+    #OR invoke function (using lambci/lambda)  
+    $ make func=funcName event=/path/to/event.json local-invoke
+    #OR invoke function using SAM [will export to SAM, build and invoke func]
+    $ make func=funcName event=/path/to/event.json sam-invoke
 ```
 
 ### Deploy project remotely

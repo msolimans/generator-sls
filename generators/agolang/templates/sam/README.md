@@ -5,14 +5,15 @@
 
 ### Running locally 
 
+Suppose we have added `rest` handler:
 
 ```bash
     #Start local API in port 3000
     $ make local-api 
-    #Invoke function
-    $ make func=FuncName event=/path/to/event.json invoke
-    #Using SAM
-    $ sam local invoke --event /path/to/event.json FuncName
+    #Invoke function (Notice Rest starts with uppercase letter)
+    $ make func=Rest event=/rest/event.json local-invoke
+    #Using SAM, Notice Function added after Rest here
+    $ sam local invoke --event /rest/event.json RestFunction
 ```
 
 ### Deploy project remotely

@@ -9,7 +9,7 @@ clean:
 	rm -rf ./bin ./vendor Gopkg.lock
 
 deploy: clean build
-	sls deploy --verbosecd
+	sam deploy --template-file packaged-template.yaml --stack-name <%=projectName%> --verbosecd
 
 gomodgen:
 	chmod u+x gomod.sh
@@ -17,3 +17,15 @@ gomodgen:
 
 local-api: clean build
 	sam local start-api
+
+local-invoke: clean build
+	sam local invoke --event $(event) $(func)Function
+
+sam-invoke: clean build
+	sam local invoke --event $(event) $(func)
+
+undeploy:
+	aws cloudformation delete-stack --stack-name <%=projectName%>
+
+test:
+	go test ./... -cover
