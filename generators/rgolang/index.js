@@ -39,8 +39,7 @@ function updateSamTemplate(route, file) {
             Method: ${route.method.toUpperCase()}
       Environment: # More info about Env Vars: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#environment-object
         Variables:
-          PARAM1: VALUE\n
-    `;
+          PARAM1: VALUE\n\n`;
 
     if (file.indexOf(insert) === -1) {
         newFile = file.replace(hook, insert + hook);
