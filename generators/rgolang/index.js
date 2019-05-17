@@ -36,7 +36,7 @@ function updateSamTemplate(route, file) {
           Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
           Properties:
             Path: /${route.slugName}
-            Method: GET
+            Method: ${route.method.toUpperCase()}
       Environment: # More info about Env Vars: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#environment-object
         Variables:
           PARAM1: VALUE\n
