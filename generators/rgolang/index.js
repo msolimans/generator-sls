@@ -2,6 +2,68 @@
 
 const generators = require("yeoman-generator");
 const fileReader = require("html-wiring");
+const frameworks = require("../../common/frameworks");
+
+
+function updateYamlFile(framework, route, file) {
+    switch (framework.toLowerCase()) {
+        case frameworks.serverless:
+            return updateServerless(route, file);
+        case frameworks.sam:
+        default:
+            return updateSamTemplate(route, file);
+    }
+}
+
+/**
+ * Updates the template.yaml file with the new routes
+ * @param  {Object} route Object containing all the route names
+ * @param  {String} file String representation of our file
+ * @return {String} Our modified version of the input file
+ */
+function updateSamTemplate(route, file) {
+    const hook = "### yeoman hook ###";
+    let newFile = null;
+    const insert = `  ${route.pascalName}Function:
+    Type: AWS::Serverless::Function 
+    Properties:
+      CodeUri: bin/
+      Handler: ${route.slugName}
+      Runtime: go1.x
+      Tracing: Active # https://docs.aws.amazon.com/lambda/latest/dg/lambda-x-ray.html
+      Events:
+        CatchAll:
+          Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
+          Properties:
+            Path: /${route.slugName}
+            Method: GET
+      Environment: # More info about Env Vars: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#environment-object
+        Variables:
+          PARAM1: VALUE\n
+    `;
+
+    if (file.indexOf(insert) === -1) {
+        newFile = file.replace(hook, insert + hook);
+    }
+
+    const outputHook = "### output yeoman hook ###";
+
+    const output = `  ${route.pascalName}API:
+    Description: "API Gateway endpoint URL for Prod environment for ${route.pascalName}"
+    Value: !Sub "https://\${ServerlessRestApi}.execute-api.\${AWS::Region}.amazonaws.com/Prod/${route.slugName}/"\n
+  ${route.pascalName}Function:
+    Description: "${route.pascalName} Lambda Function ARN"
+    Value: !GetAtt ${route.pascalName}Function.Arn\n
+  ${route.pascalName}FunctionIamRole:
+    Description: "Implicit IAM Role created for ${route.pascalName} function"
+    Value: !GetAtt ${route.pascalName}FunctionRole.Arn\n\n`;
+
+    if (newFile.indexOf(output) === -1) {
+        newFile = newFile.replace(outputHook, output + outputHook);
+    }
+
+    return newFile;
+}
 
 /**
  * Updates the serverless.yml file with the new routes
@@ -9,7 +71,7 @@ const fileReader = require("html-wiring");
  * @param  {String} file String representation of our file
  * @return {String} Our modified version of the input file
  */
-function updateYamlFile(route, file) {
+function updateServerless(route, file) {
     //route.method => event
     const hook = "### yeoman hook ###";
     let newFile = null;
@@ -54,6 +116,7 @@ function updateMakeFile(route, file) {
 const serverGenerator = generators.Base.extend({
     prompting: {
 
+
         ask() {
 
             return this.prompt([{
@@ -61,7 +124,7 @@ const serverGenerator = generators.Base.extend({
                 message: "Unit Test Framework to be used?",
                 type: "list",
                 choices: ["Testify", "Convey"]
-            }]).then( (answers) => {
+            }]).then((answers) => {
                 this.unitTest = answers.unitTest;
             });
         }
@@ -71,7 +134,7 @@ const serverGenerator = generators.Base.extend({
         routes() {
 
             // We get the serverless.yml file as a string
-            const path = this.destinationPath("serverless.yml");
+            const path = this.destinationPath(frameworks.getYamlFile(this.options.framework));
             let file = fileReader.readFileAsString(path);
 
             const makePath = this.destinationPath("Makefile");
@@ -114,7 +177,7 @@ const serverGenerator = generators.Base.extend({
                     this.destinationPath(`${route.slugName}/event.json`)
                 );
 
-                file = updateYamlFile(route, file);
+                file = updateYamlFile(this.options.framework, route, file);
                 makeFile = updateMakeFile(route, makeFile);
 
 
@@ -138,7 +201,7 @@ const serverGenerator = generators.Base.extend({
     sls2sam() {
         if (!this.options.__app) {
             //  this.spawnCommand("make")
-            // this.spawnCommand("sls", ["sam", "export", " --output", "template.yml"]);
+            // this.spawnCommand("serverless", ["sam", "export", " --output", "template.yml"]);
         }
     }
 });
