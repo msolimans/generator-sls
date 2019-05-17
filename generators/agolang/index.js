@@ -2,9 +2,8 @@
 
 
 const yosay = require("yosay");
-
 const generators = require("yeoman-generator");
-
+const languages = require("../../common/languages");
 /**
  * Golang Generators
  */
@@ -12,10 +11,12 @@ const serverGenerator = generators.Base.extend({
 
 
     writing: {
+
         welcome() {
             this.log(yosay(
                 "Ready for Golang, Start writing ...."
             ));
+
         },
 
         git() {
@@ -29,20 +30,12 @@ const serverGenerator = generators.Base.extend({
             );
         },
 
-        readMe() {
-            this.fs.copyTpl(
-                this.templatePath("README.md"),
-                this.destinationPath("README.md"), {
-                    projectName: this.projectName,
-                    projectDescription: this.projectDescription,
-                }
-            );
-        },
+        frameworkWrites() {
 
-        packageJSON() {
+            //readme and serverless|template
             this.fs.copyTpl(
-                this.templatePath("package.json"),
-                this.destinationPath("package.json"), {
+                this.templatePath(`${this.options.props.framework}/*`),//more specific to framework type
+                this.destinationPath(), {
                     projectName: this.options.props.projectName,
                     projectDescription: this.options.props.projectDescription,
                     projectVersion: this.options.props.projectVersion,
@@ -50,20 +43,7 @@ const serverGenerator = generators.Base.extend({
                     authorEmail: this.options.props.authorEmail,
                 }
             );
-        },
-        serverlessYaml() {
-            this.fs.copyTpl(
-                this.templatePath("serverless.yml"),
-                this.destinationPath("serverless.yml"), {
-                    projectName: this.options.props.projectName,
-                }
-            );
-        },
-        makeFile() {
-            this.fs.copyTpl(
-                this.templatePath("Makefile"),
-                this.destinationPath("Makefile")
-            );
+
         },
 
         build() {
@@ -81,15 +61,17 @@ const serverGenerator = generators.Base.extend({
                 this.destinationPath("config.json")
             );
 
-            this.fs.copy(
+            this.fs.copyTpl(
                 this.templatePath("slsattributes.json"),
-                this.destinationPath("slsattributes.json")
+                this.destinationPath("slsattributes.json"), {
+                    framework: this.options.props.framework,
+                }
             );
 
         },
-        vscode() {
+        vscode() {//todo: make it generic based on IDE selection
             this.fs.copy(
-                this.templatePath("launch.json"),
+                this.templatePath("ide/vscode/launch.json"),
                 this.destinationPath(".vscode/launch.json")
             );
         },
@@ -97,7 +79,7 @@ const serverGenerator = generators.Base.extend({
     },
 
     install() {
-        this.composeWith("sls:route", {options: {__app: this.options.props.__app, language: "golang"}});
+        this.composeWith("sls:route", {options: {__app: this.options.props.__app, language: languages.golang}});
         this.npmInstall();
     },
 
