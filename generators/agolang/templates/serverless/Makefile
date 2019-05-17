@@ -27,8 +27,11 @@ local-api: sam
 sam-invoke: sam
 	sam local invoke --event $(event) $(func)
 
+sam-debug: sam
+	sam local invoke -d 8997 --debugger-path ./scripts/linux --debug  --region us-east-1 --docker-network $(network) --event $(event) $(func)
+
 local-invoke: build
-	docker run --rm -v $(shell pwd)/bin:/var/task lambci/lambda:go1.x $(func) $(event)
+	docker run --rm -v $(shell pwd)/bin:/var/task lambci/lambda:go1.x $(func) '$(shell cat $(event))'
 
 undeploy:
 	sls undeploy --verbosed

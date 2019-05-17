@@ -3,7 +3,7 @@
 
 ## CLI
 
-### Running locally 
+### Running locally `make ... local-invoke|sam-invoke`
 
 Suppose we have added `rest` handler:
 
@@ -15,6 +15,23 @@ Suppose we have added `rest` handler:
     #Using SAM, Notice Function added after Rest here
     $ sam local invoke --event /rest/event.json RestFunction
 ```
+
+- `func` specified in capital case `Create`
+- `event` path to the event file 
+
+
+### Debug locally `make ... local-debug|sam-debug`
+
+Debugging is easier than you might think. Run the following command, it will create a debugging session on port `8997`, put the break points, attach your favourite IDE to the same port and boom!
+
+```bash
+    $ make network=services_default func=Create event=create/event.json sam-debug
+```
+
+- `func` specified in capital case `Create`
+- `event` path to the event file 
+- `network` is a docker network you need inside which you need to run your lambda as container
+
 
 ### Deploy project remotely
 

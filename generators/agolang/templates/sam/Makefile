@@ -19,10 +19,16 @@ local-api: clean build
 	sam local start-api
 
 local-invoke: clean build
-	sam local invoke --event $(event) $(func)Function
+	docker run --rm -v $(shell pwd)/bin:/var/task lambci/lambda:go1.x $(func) '$(shell cat $(event))'
 
 sam-invoke: clean build
-	sam local invoke --event $(event) $(func)
+	sam local invoke --event $(event) $(func)Function
+
+local-debug: clean build
+	sam local invoke -d 8997 --debugger-path ./scripts/linux --debug  --region us-east-1 --docker-network $(network) --event $(event) $(func)Function
+
+sam-debug: clean build
+	sam local invoke -d 8997 --debugger-path ./scripts/linux --debug  --region us-east-1 --docker-network $(network) --event $(event) $(func)Function
 
 undeploy:
 	aws cloudformation delete-stack --stack-name <%=projectName%>
