@@ -5,6 +5,9 @@ build: gomodgen
 ### yeoman hook ###
 ## Don't touch this comment, the subgenerator needs it'
 
+access:
+	chmod -R u+x ./scripts/
+
 clean:
 	rm -rf ./bin ./vendor Gopkg.lock
 
@@ -18,17 +21,17 @@ gomodgen:
 local-api: clean build
 	sam local start-api
 
-local-invoke: clean build
-	docker run --rm -v $(shell pwd)/bin:/var/task lambci/lambda:go1.x $(func) '$(shell cat $(event))'
+local-invoke: clean build access
+	./scripts/localinvoke.sh '$(func)' '$(event)' '$(network)'
 
-sam-invoke: clean build
-	sam local invoke --event $(event) $(func)Function
+sam-invoke: clean build access
+	./scripts/samlocal.sh '$(func)' '$(event)' '$(network)'
 
-local-debug: clean build
-	sam local invoke -d 8997 --debugger-path ./scripts/linux --debug  --region us-east-1 --docker-network $(network) --event $(event) $(func)Function
+debug: clean build access
+	./scripts/samdebug.sh '$(func)' '$(event)' '$(network)'
 
-sam-debug: clean build
-	sam local invoke -d 8997 --debugger-path ./scripts/linux --debug  --region us-east-1 --docker-network $(network) --event $(event) $(func)Function
+sam-debug: clean build access
+	./scripts/samdebug.sh '$(func)' '$(event)' '$(network)'
 
 undeploy:
 	aws cloudformation delete-stack --stack-name <%=projectName%>

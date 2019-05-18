@@ -8,6 +8,9 @@ build: gomodgen
 	mkdir -p .serverless
 	zip .serverless/<%=projectName%>.zip bin/*
 
+access:
+	chmod -R u+x ./scripts/
+
 clean:
 	rm -rf ./bin ./vendor Gopkg.lock
 
@@ -24,14 +27,17 @@ sam: build
 local-api: sam
 	sam local start-api
 
+local-invoke: clean build access
+	./scripts/localinvoke.sh '$(func)' '$(event)' '$(network)'
+
 sam-invoke: sam
-	sam local invoke --event $(event) $(func)
+	./scripts/samlocal.sh '$(func)' '$(event)' '$(network)' 'export'
 
-sam-debug: sam
-	sam local invoke -d 8997 --debugger-path ./scripts/linux --debug  --region us-east-1 --docker-network $(network) --event $(event) $(func)
+debug: sam access
+	./scripts/samdebug.sh '$(func)' '$(event)' '$(network)' 'export'
 
-local-invoke: build
-	docker run --rm -v $(shell pwd)/bin:/var/task lambci/lambda:go1.x $(func) '$(shell cat $(event))'
+sam-debug: sam access
+	./scripts/samdebug.sh '$(func)' '$(event)' '$(network)' 'export'
 
 undeploy:
 	sls undeploy --verbosed

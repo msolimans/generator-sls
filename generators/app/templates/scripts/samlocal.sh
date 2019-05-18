@@ -1,21 +1,29 @@
 #!/usr/bin/env bash
 
-dir=$1
-func=$2
-debug=$3
+func="$(tr '[:lower:]' '[:upper:]' <<< ${1:0:1})${1:1}"
+network=""
+event="$1/event.json"
 
-cd ${dir}
-#build the function
-make
-cd ..
-echo "Running SAM inside directory $(pwd)"
-sls sam export --output template.yaml
-func="$(tr '[:lower:]' '[:upper:]' <<< ${func:0:1})${func:1}"
-
-if [ ${debug} ]; then
-echo "DEBUG MODE! \n sam local invoke ${func} -d 8997 -e ${func}/event.json --debugger-path ./scripts/linux/"
-sam local invoke ${func} -d 8997 -e ${func}/event.json --debugger-path ./scripts/linux/
+if [[ -z "$2" ]]; then
+    echo "No events passed, applying default from ${event}"
 else
-echo "sam local invoke ${func} --event ${func}/event.json"
-sam local invoke ${func} --event ${func}/event.json
+    echo "Applying passed events"
+    event=$2
+fi
+
+#handle exported sam naming diffs
+if [[ -z "$4" ]]; then
+    func="${func}Function"
+fi
+
+
+if [[ -z "$3" ]]; then
+    echo "No docker network specified, applying default docker0"
+    echo "sam local invoke --debug  --region us-east-1 --event ${event} ${func}"
+    sam local invoke --debug  --region us-east-1 --event ${event} ${func}
+else
+    echo "Docker Network"
+    network="$3"
+    echo "sam local invoke --debug  --region us-east-1 --docker-network ${network} --event ${event} ${func}"
+    sam local invoke --debug  --region us-east-1 --docker-network ${network} --event ${event} ${func}
 fi

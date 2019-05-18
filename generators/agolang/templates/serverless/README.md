@@ -3,28 +3,36 @@
 
 ## CLI
 
-### Running locally `make ... local-invoke|sam-invoke`
+### Running locally 
 
-Not supported by Serverless framework itself, however we wired this up with `lambci/lambda`: 
+This is not supported by Serverless framework itself, however we wired this up with `lambci/lambda`: 
 
 ```bash
-    #Start local API in port 3000
-    $ make local-api 
     #OR invoke function (using lambci/lambda)  
-    $ make func=funcName event=/path/to/event.json local-invoke
+    $ make local-invoke func=funcName event=/path/to/event.json
     #OR invoke function using SAM [will export to SAM, build and invoke func]
-    $ make func=funcName event=/path/to/event.json sam-invoke
+    $ make sam-invoke func=funcName event=/path/to/event.json
 ```
 
-- `func` specified in capital case `Rest`
-- `event` path to the event file 
+-   `func` specified in capital case `Rest`
+-   `event` path to the event file
+-   `network` is a docker network you need inside which you need to run your lambda as container 
 
-### Debug locally `make ... sam-debug`
+There's also a way of starting the API and exposing it as an HTTP endpoint to be tested by POSTMAN
+
+```bash
+    #Start local API on port 3000
+    $ make local-api 
+```
+
+### Debug locally `make debug|sam-debug`
 
 Debugging is easier than you might think. Run the following command, it will create a debugging session on port `8997`, put the break points, attach your favourite IDE to the same port and boom!
 
 ```bash
-    $ make network=services_default func=Create event=create/event.json sam-debug
+    $ make sam-debug network=services_default func=create event=create/event.json
+    #OR
+    $ make debug network=services_default func=create event=create/event.json
 ```
 
 -   `func` specified in capital case `Create`
