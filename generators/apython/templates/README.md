@@ -1,6 +1,8 @@
 # <%= projectName %>
 <%= projectDescription %>
 
+## CLI 
+
 ### Add a new route 
 
 ```bash

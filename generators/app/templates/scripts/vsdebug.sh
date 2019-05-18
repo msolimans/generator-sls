@@ -7,21 +7,21 @@ fi
 
 cd ${path}
 
-echo '{
-    "version": "0.2.0",
-    "configurations": [
+echo "{
+    \"version\": \"0.2.0\",
+    \"configurations\": [
     {
-        "name": "Connect to Lambda container",
-        "type": "go",
-        "request": "launch",
-        "mode": "remote",
-        "remotePath": "",
-        "port": 8997,
-        "host": "127.0.0.1",
-        "program": "${workspaceRoot}",
-        "apiVersion": 1,
-        "env": {},
-        "args": [],
+        \"name\": \"Connect to Lambda container\",
+        \"type\": \"go\",
+        \"request\": \"launch\",
+        \"mode\": \"remote\",
+        \"remotePath\": \"\",
+        \"port\": 8997,
+        \"host\": \"127.0.0.1\",
+        \"program\": \"${workspaceRoot}\",
+        \"apiVersion\": 1,
+        \"env\": {},
+        \"args\": [],
       },
     ]
-  }' > launch.json
+  }" > launch.json

@@ -43,8 +43,14 @@
     "sls",
     "nodejs",
     "golang",
+    "dotnetcore",
+    ".netcore",
+    "java",
+    "python",
     "lambda",
-    "aws"
+    "aws",
+    "serverless",
+    "lambda"
   ],
   "repository": {
     "type": "git",
