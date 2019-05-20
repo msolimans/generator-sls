@@ -1,3 +1,5 @@
 {
-"language":"dotnet"
+  "language": "dotnet",
+  "framework": "<%= framework %>",
+  "projectName": "<%= projectName %>"
 }

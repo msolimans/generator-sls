@@ -1,6 +1,8 @@
 "use strict";
 
 
+const languages = require("../../common/languages");
+
 const yosay = require("yosay");
 const generators = require("yeoman-generator");
 
@@ -11,6 +13,7 @@ const serverGenerator = generators.Base.extend({
 
 
     writing: {
+
 
         welcome() {
             this.log(yosay(
@@ -30,16 +33,6 @@ const serverGenerator = generators.Base.extend({
             );
         },
 
-        readMe() {
-            this.fs.copyTpl(
-                this.templatePath("README.md"),
-                this.destinationPath("README.md"), {
-                    projectName: this.options.props.projectName,
-                    projectDescription: this.options.props.projectDescription,
-                }
-            );
-        },
-
         packageJSON() {
             this.fs.copyTpl(
                 this.templatePath("package.json"),
@@ -52,52 +45,65 @@ const serverGenerator = generators.Base.extend({
                 }
             );
         },
-        serverlessYaml() {
+        frameworkWrites() {
+
+            //readme and serverless|template
             this.fs.copyTpl(
-                this.templatePath("serverless.yml"),
-                this.destinationPath("serverless.yml"), {
+                this.templatePath(`${this.options.props.framework}/*`),//more specific to framework type
+                this.destinationPath(`${this.options.props.projectName}/`), {
+                    projectName: this.options.props.projectName,
+                    projectDescription: this.options.props.projectDescription,
+                    projectVersion: this.options.props.projectVersion,
+                    authorName: this.options.props.authorName,
+                    authorEmail: this.options.props.authorEmail,
+                }
+            );
+
+        },
+
+        build() {
+            const dest = this.options.props.projectName;
+
+
+            this.fs.copy(
+                this.templatePath("./MyService/aws-csharp.csproj"),
+                this.destinationPath(`${dest}/${this.options.props.projectName}.csproj`)
+            );
+
+            this.fs.copyTpl(
+                this.templatePath("./MyService.Tests/MyService.Tests.csproj"),
+                this.destinationPath(`${dest}.Tests/${this.options.props.projectName}.tests.csproj`), {
                     projectName: this.options.props.projectName,
                 }
             );
-        },
-        makeFile() {
-            this.fs.copyTpl(
-                this.templatePath("Makefile"),
-                this.destinationPath("Makefile"), {}
-            );
-        },
-        build() {
 
-
-
-            this.fs.copy(
-                this.templatePath("aws-csharp.csproj"),
-                this.destinationPath("aws-csharp.csproj")
-            );
 
             this.fs.copy(
                 this.templatePath("build.sh"),
-                this.destinationPath("build.sh")
+                this.destinationPath(`${dest}/build.sh`)
             );
 
             this.fs.copy(
                 this.templatePath("build.cmd"),
-                this.destinationPath("build.cmd")
+                this.destinationPath(`${dest}/build.cmd`)
             );
-
-
         },
 
 
         config() {
-            this.fs.copy(
-                this.templatePath("config.json"),
-                this.destinationPath("config.json")
-            );
+            const dest = this.options.props.projectName;
 
             this.fs.copy(
+                this.templatePath("./MyService/config.json"),
+                this.destinationPath(`${dest}/config.json`)
+            );
+
+            this.fs.copyTpl(
                 this.templatePath("slsattributes.json"),
-                this.destinationPath("slsattributes.json")
+                this.destinationPath("slsattributes.json"), {
+                    framework: this.options.props.framework,
+                    projectName: this.options.props.projectName,
+                }
             );
 
         },
@@ -111,7 +117,13 @@ const serverGenerator = generators.Base.extend({
     },
 
     install() {
-        this.composeWith("sls:route", {options: {__app: this.options.__app, language: "dotnet"}});
+        this.composeWith("sls:route", {
+            options: {
+                __app: this.options.__app,
+                projectName: this.options.props.projectName,
+                language: languages.dotnet
+            }
+        });
         this.npmInstall();
     },
 

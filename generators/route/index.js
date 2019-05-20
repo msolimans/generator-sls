@@ -75,7 +75,7 @@ const serverGenerator = generators.Base.extend({
 
             let slsAttributes = {};
 
-            if (!this.options.language || !this.options.framework) {
+            if (!this.options.language || !this.options.framework || !this.options.projectName) {
                 const slsAttributesPath = this.destinationPath("slsattributes.json");
 
                 slsAttributes = fileReader.readFileAsString(slsAttributesPath);
@@ -94,9 +94,17 @@ const serverGenerator = generators.Base.extend({
                 } else if (this.options.framework) {
                     slsAttributes.framework = this.options.framework;
                 }
+
+                //projectName
+                if (!this.options.projectName && !slsAttributes.projectName) {
+                    slsAttributes.projectName = "aws-sample";
+                } else if (this.options.projectName) {
+                    slsAttributes.projectName = this.options.projectName;
+                }
             } else {
                 slsAttributes.language = this.options.language;
                 slsAttributes.framework = this.options.framework;
+                slsAttributes.projectName = this.options.projectName;
             }
 
             // We process each route
@@ -120,6 +128,7 @@ const serverGenerator = generators.Base.extend({
                         __app: this.options.__app,
                         language: slsAttributes.language,
                         framework: slsAttributes.framework,
+                        projectName: slsAttributes.projectName,
                         routes: this.routes
                     }
                 });

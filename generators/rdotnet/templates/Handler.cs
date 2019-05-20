@@ -6,7 +6,7 @@ using Newtonsoft.Json;
 using System.Runtime.Serialization;
 
 
-namespace AwsDotnetCsharp
+namespace <%=ProjectName%>
 {
     public class <%=Prefix%>Handler
     {

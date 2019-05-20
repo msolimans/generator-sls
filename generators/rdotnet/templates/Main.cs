@@ -3,7 +3,7 @@ using System;
 
 [assembly:LambdaSerializer(typeof(Amazon.Lambda.Serialization.Json.JsonSerializer))]
 
-namespace AwsDotnetCsharp
+namespace <%=ProjectName%>
 {
     public class Main
     {

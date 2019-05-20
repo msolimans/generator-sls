@@ -65,6 +65,7 @@ const serverGenerator = generators.Base.extend({
                 this.templatePath("slsattributes.json"),
                 this.destinationPath("slsattributes.json"), {
                     framework: this.options.props.framework,
+                    projectName: this.options.props.projectName,
                 }
             );
 

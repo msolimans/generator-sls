@@ -1,4 +1,5 @@
 {
   "language": "golang",
-  "framework": "<%= framework %>"
+  "framework": "<%= framework %>",
+  "projectName": "<%= projectName %>"
 }

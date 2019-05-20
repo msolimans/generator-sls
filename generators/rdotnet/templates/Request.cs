@@ -3,7 +3,7 @@ using System;
 
 
 
-namespace AwsDotnetCsharp
+namespace <%=ProjectName%>
 {
     public class <%=Prefix%>Request
     {
