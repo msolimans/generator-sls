@@ -60,11 +60,14 @@ const serverGenerator = generators.Base.extend({
 
         routes() {
 
+            const dest = `./${this.options.projectName}`;
+            const testDest = `./${this.options.projectName}.Tests`;
+
             // We get the serverless.yml file as a string
-            const path = this.destinationPath("serverless.yml");
+            const path = this.destinationPath(`${dest}/serverless.yml`);
             let file = fileReader.readFileAsString(path);
 
-            const makePath = this.destinationPath("Makefile");
+            const makePath = this.destinationPath(`${dest}/Makefile`);
             let makeFile = fileReader.readFileAsString(makePath);
 
 
@@ -82,34 +85,60 @@ const serverGenerator = generators.Base.extend({
 
                 const root = ".";
 
+
+
                 if (!this.fs.exists(this.destinationPath("Main.cs"))) {
-                    this.fs.copy(this.templatePath(`${root}/Main.cs`),
-                        this.destinationPath("Main.cs")
+                    this.fs.copyTpl(this.templatePath(`${root}/Main.cs`),
+                        this.destinationPath(`${dest}/Main.cs`),
+                        {
+                            ProjectName: this.options.projectName
+                        }
                     );
                 }
 
                 this.fs.copyTpl(
                     this.templatePath(`${root}/Handler.cs`),
-                    this.destinationPath(`${route.pascalName}Handler.cs`), {
-                        Prefix: route.pascalName
+                    this.destinationPath(`${dest}/${route.pascalName}Handler.cs`), {
+                        Prefix: route.pascalName,
+                        ProjectName: this.options.projectName,
                     }
                 );
 
                 this.fs.copyTpl(
                     this.templatePath(`${root}/Request.cs`),
-                    this.destinationPath(`${route.pascalName}Request.cs`),
+                    this.destinationPath(`${dest}/${route.pascalName}Request.cs`),
                     {
-                        Prefix: route.pascalName
+                        Prefix: route.pascalName,
+                        ProjectName: this.options.projectName,
                     }
                 );
 
                 this.fs.copyTpl(
                     this.templatePath(`${root}/Response.cs`),
-                    this.destinationPath(`${route.pascalName}Response.cs`),
+                    this.destinationPath(`${dest}/${route.pascalName}Response.cs`),
                     {
-                        Prefix: route.pascalName
+                        Prefix: route.pascalName,
+                        ProjectName: this.options.projectName,
                     }
                 );
+
+                this.fs.copyTpl(
+                    this.templatePath(`${root}/Response.cs`),
+                    this.destinationPath(`${testDest}/${route.pascalName}Response.cs`),
+                    {
+                        Prefix: route.pascalName,
+                        ProjectName: this.options.projectName,
+                    }
+                );
+
+                this.fs.copyTpl(
+                    this.templatePath(`${root}/HandlerTest.cs`),
+                    this.destinationPath(`${testDest}/${route.pascalName}HandlerTest.cs`), {
+                        Prefix: route.pascalName,
+                        ProjectName: this.options.projectName,
+                    }
+                );
+
 
                 file = updateYamlFile(route, file);
                 makeFile = updateMakeFile(route, makeFile);
