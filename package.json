@@ -1,5 +1,5 @@
 {
-  "version": "0.0.19",
+  "version": "0.0.20",
   "license": "MIT",
   "main": "index.js",
   "name": "generator-sls",
