@@ -169,13 +169,6 @@ const serverGenerator = generators.Base.extend({
                     );
                 }
 
-
-                //events
-                this.fs.copyTpl(
-                    this.templatePath(`${root}/event.json`),
-                    this.destinationPath(`${route.slugName}/event.json`)
-                );
-
                 file = updateYamlFile(this.options.framework, route, file);
                 makeFile = updateMakeFile(route, makeFile);
 

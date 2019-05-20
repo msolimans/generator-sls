@@ -68,16 +68,9 @@ const serverGenerator = generators.Base.extend({
                     return;
                 }
 
-
                 this.fs.copyTpl(
                     this.templatePath(`${root}/handler.py`),
                     this.destinationPath(`${dstRoot}/${route.slugName}.py`), {}
-                );
-
-                //events
-                this.fs.copyTpl(
-                    this.templatePath(`${root}/event.json`),
-                    this.destinationPath(`${dstRoot}/event_${route.slugName}.json`)
                 );
 
                 file = updateYamlFile(route, file);

@@ -12,7 +12,8 @@ fi
 if [[ -z "$3" ]]; then
     echo "No docker network specified, applying default docker0"
     echo "docker run --rm -v $PWD/bin:/var/task lambci/lambda:go1.x $1 '$(cat ${event})'"
-    docker run --rm -v $PWD/bin:/var/task lambci/lambda:go1.x $1 '$(cat $event)'
+    content=$(cat ${event})
+    docker run --rm -v ${PWD}/bin:/var/task lambci/lambda:go1.x ${1} "${content}"
 else
     network="$3"
     echo "Docker Network Specified: ${network}"

@@ -5,7 +5,7 @@ const generators = require("yeoman-generator");
 const fileReader = require("html-wiring");
 const frameworks = require("../../common/frameworks");
 const languages = require("../../common/languages");
-
+const events = require("../../common/methodevents");
 
 /**
  * Generates the different types of names for our routes
@@ -98,6 +98,21 @@ const serverGenerator = generators.Base.extend({
                 slsAttributes.language = this.options.language;
                 slsAttributes.framework = this.options.framework;
             }
+
+            // We process each route
+            this.routes.forEach((route) => {
+                if (events[route.method]) {
+                    //events
+                    this.fs.copyTpl(
+                        this.templatePath(`./events/${events[route.method]}/event.json`),
+                        this.destinationPath(`${route.slugName}/event.json`),
+                        {
+                            routeName: route.slugName,
+                            method: route.method.toUpperCase()
+                        }
+                    );
+                }
+            });
 
             this.composeWith(`sls:r${slsAttributes.language}`,
                 {

@@ -1,0 +1,12 @@
+"use strict";
+
+const MethodEvents = {
+    "get": "apigateway",
+    "post": "apigateway",
+    "put": "apigateway",
+    "delete": "apigateway",
+    "cron": "cloudwatch",
+    "none": "lambda",
+};
+
+module.exports = MethodEvents;
