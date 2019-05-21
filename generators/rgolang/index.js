@@ -3,7 +3,7 @@
 const generators = require("yeoman-generator");
 const fileReader = require("html-wiring");
 const frameworks = require("../../common/frameworks");
-
+const events = require("../../common/methodevents");
 
 function updateYamlFile(framework, route, file) {
     switch (framework.toLowerCase()) {
@@ -147,6 +147,19 @@ const serverGenerator = generators.Base.extend({
                     this.log(`Route ${route.slugName} already exists`);
                     return;
                 }
+
+                if (events[route.method]) {
+                    //events
+                    this.fs.copyTpl(
+                        this.templatePath(`../../../common/events/${events[route.method]}/event.json`),
+                        this.destinationPath(`${route.slugName}/event.json`),
+                        {
+                            routeName: route.slugName,
+                            method: route.method.toUpperCase()
+                        }
+                    );
+                }
+
 
                 const root = ".";
 

@@ -46,7 +46,13 @@ const serverGenerator = generators.Base.extend({
 
         },
 
-        build() {
+        scripts() {
+            this.fs.copyTpl(
+                this.templatePath("./scripts/*"),
+                this.destinationPath(`./scripts`),{
+                    projectName: this.options.props.projectName,
+                }
+            );
 
             this.fs.copy(
                 this.templatePath("gomod.sh"),

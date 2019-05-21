@@ -107,21 +107,6 @@ const serverGenerator = generators.Base.extend({
                 slsAttributes.projectName = this.options.projectName;
             }
 
-            // We process each route
-            this.routes.forEach((route) => {
-                if (events[route.method]) {
-                    //events
-                    this.fs.copyTpl(
-                        this.templatePath(`./events/${events[route.method]}/event.json`),
-                        this.destinationPath(`${route.slugName}/event.json`),
-                        {
-                            routeName: route.slugName,
-                            method: route.method.toUpperCase()
-                        }
-                    );
-                }
-            });
-
             this.composeWith(`sls:r${slsAttributes.language}`,
                 {
                     options: {

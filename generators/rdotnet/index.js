@@ -2,6 +2,8 @@
 
 const generators = require("yeoman-generator");
 const fileReader = require("html-wiring");
+const frameworks = require("../../common/frameworks");
+const events = require("../../common/methodevents");
 
 /**
  * Updates the serverless.yml file with the new routes
@@ -9,7 +11,19 @@ const fileReader = require("html-wiring");
  * @param  {String} file String representation of our file
  * @return {String} Our modified version of the input file
  */
-function updateYamlFile(route, file) {
+
+function updateYamlFile(framework, route, file) {
+    switch (framework.toLowerCase()) {
+        case frameworks.serverless:
+            return updateServerless(route, file);
+        case frameworks.sam:
+        default:
+            return updateSamTemplate(route, file);
+    }
+}
+
+
+function updateServerless(route, file) {
     const hook = "### yeoman hook ###";
     let newFile = null;
 
@@ -38,18 +52,10 @@ function updateYamlFile(route, file) {
     return newFile;
 }
 
-function updateMakeFile(route, file) {
-    const hook = "### yeoman hook ###";
-    let newFile = null;
-    const insert = `	GOARCH=amd64 GOOS=linux go build -gcflags="-N -l" -o bin/${route.slugName} ${route.slugName}/main.go\n`;
 
-    if (file.indexOf(insert) === -1) {
-        newFile = file.replace(hook, insert + hook);
-    }
-
-    return newFile;
+function updateSamTemplate(route, file) {
+    //todo
 }
-
 
 /**
  * The route subgenerator
@@ -64,7 +70,7 @@ const serverGenerator = generators.Base.extend({
             const testDest = `./${this.options.projectName}.Tests`;
 
             // We get the serverless.yml file as a string
-            const path = this.destinationPath(`${dest}/serverless.yml`);
+            const path = this.destinationPath(`${dest}/${frameworks.getYamlFile(this.options.framework)}`);
             let file = fileReader.readFileAsString(path);
 
             const makePath = this.destinationPath(`${dest}/Makefile`);
@@ -85,6 +91,18 @@ const serverGenerator = generators.Base.extend({
 
                 const root = ".";
 
+
+                if (events[route.method]) {
+                    //events
+                    this.fs.copyTpl(
+                        this.templatePath(`../../../common/events/${events[route.method]}/event.json`),
+                        this.destinationPath(`${dest}/${route.slugName}_event.json`),
+                        {
+                            routeName: route.slugName,
+                            method: route.method.toUpperCase()
+                        }
+                    );
+                }
 
 
                 if (!this.fs.exists(this.destinationPath("Main.cs"))) {
@@ -140,8 +158,7 @@ const serverGenerator = generators.Base.extend({
                 );
 
 
-                file = updateYamlFile(route, file);
-                makeFile = updateMakeFile(route, makeFile);
+                file = updateYamlFile(this.options.framework, route, file);
 
 
                 // this.fs.copyTpl(
@@ -157,8 +174,6 @@ const serverGenerator = generators.Base.extend({
             // rewrite the serverless.yml
             this.write(path, file);
 
-            //Makefile
-            this.write(makePath, makeFile);
         },
     },
     sls2sam() {
