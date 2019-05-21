@@ -34,7 +34,7 @@ const serverGenerator = generators.Base.extend({
                     name: "projectName",
                     type: "input",
                     message: "What is the project name:",
-                    filter: (answer) => to.slug(answer),
+                    //filter: (answer) => to.slug(answer),
                     default: path.basename(this.destinationPath()),
                 },
                 {
