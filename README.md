@@ -9,6 +9,10 @@
 
 Yeoman generator for a lambda Serverless project
 
+![](https://gfycat.com/YoungShockingBirdofparadise)
+
+![](go-pt1.gif)
+
 ## Requirements
 
 *   Language of choice (Go 1.11, Python 2.7+, NodeJS 6+, .NET Core 2+, Java 8) 
