@@ -9,6 +9,7 @@
 
 Yeoman generator for a lambda Serverless project
 
+![](./assets/go-pt1.gif)
 ![](./assets/go-pt2.gif)
 
 ## Requirements
