@@ -49,7 +49,7 @@ const serverGenerator = generators.Base.extend({
         scripts() {
             this.fs.copyTpl(
                 this.templatePath("./scripts/*"),
-                this.destinationPath(`./scripts`),{
+                this.destinationPath("./scripts"),{
                     projectName: this.options.props.projectName,
                 }
             );

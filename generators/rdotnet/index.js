@@ -12,16 +12,6 @@ const events = require("../../common/methodevents");
  * @return {String} Our modified version of the input file
  */
 
-function updateYamlFile(framework, route, file) {
-    switch (framework.toLowerCase()) {
-        case frameworks.serverless:
-            return updateServerless(route, file);
-        case frameworks.sam:
-        default:
-            return updateSamTemplate(route, file);
-    }
-}
-
 
 function updateServerless(route, file) {
     const hook = "### yeoman hook ###";
@@ -55,6 +45,18 @@ function updateServerless(route, file) {
 
 function updateSamTemplate(route, file) {
     //todo
+}
+
+
+
+function updateYamlFile(framework, route, file) {
+    switch (framework.toLowerCase()) {
+        case frameworks.serverless:
+            return updateServerless(route, file);
+        case frameworks.sam:
+        default:
+            return updateSamTemplate(route, file);
+    }
 }
 
 /**

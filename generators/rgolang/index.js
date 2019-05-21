@@ -5,15 +5,6 @@ const fileReader = require("html-wiring");
 const frameworks = require("../../common/frameworks");
 const events = require("../../common/methodevents");
 
-function updateYamlFile(framework, route, file) {
-    switch (framework.toLowerCase()) {
-        case frameworks.serverless:
-            return updateServerless(route, file);
-        case frameworks.sam:
-        default:
-            return updateSamTemplate(route, file);
-    }
-}
 
 /**
  * Updates the template.yaml file with the new routes
@@ -94,6 +85,16 @@ function updateServerless(route, file) {
     }
 
     return newFile;
+}
+
+function updateYamlFile(framework, route, file) {
+    switch (framework.toLowerCase()) {
+        case frameworks.serverless:
+            return updateServerless(route, file);
+        case frameworks.sam:
+        default:
+            return updateSamTemplate(route, file);
+    }
 }
 
 function updateMakeFile(route, file) {
