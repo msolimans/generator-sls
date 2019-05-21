@@ -3,8 +3,8 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp2.1</TargetFramework>
     <GenerateRuntimeConfigurationFiles>true</GenerateRuntimeConfigurationFiles>
-    <AssemblyName>CsharpHandlers</AssemblyName>
-    <PackageId>aws-csharp</PackageId>
+    <AssemblyName><%=projectName%></AssemblyName>
+    <PackageId><%=projectName%></PackageId>
   </PropertyGroup>
 
   <ItemGroup>

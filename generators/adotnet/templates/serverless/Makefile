@@ -10,4 +10,14 @@ clean:
 deploy: clean build
 	sls deploy --verbose
 
+sam: build
+	sls sam export --output template.yaml
 
+local-api: sam
+	sam local start-api
+
+local-invoke: clean build
+	./localinvoke.sh '$(func)' '$(event)' '$(network)'
+
+test:
+	cd ../<%=projectName%>.Tests && dotnet test

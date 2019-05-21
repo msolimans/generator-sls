@@ -61,13 +61,25 @@ const serverGenerator = generators.Base.extend({
 
         },
 
+        scripts() {
+            this.fs.copyTpl(
+                this.templatePath(`scripts/*`),
+                this.destinationPath(`${this.options.props.projectName}/`), {
+                    projectName: this.options.props.projectName,
+                }
+            );
+        },
+
         build() {
             const dest = this.options.props.projectName;
 
 
-            this.fs.copy(
+            this.fs.copyTpl(
                 this.templatePath("./MyService/aws-csharp.csproj"),
-                this.destinationPath(`${dest}/${this.options.props.projectName}.csproj`)
+                this.destinationPath(`${dest}/${this.options.props.projectName}.csproj`),
+                {
+                    projectName: this.options.props.projectName,
+                }
             );
 
             this.fs.copyTpl(
@@ -77,16 +89,14 @@ const serverGenerator = generators.Base.extend({
                 }
             );
 
-
-            this.fs.copy(
-                this.templatePath("build.sh"),
-                this.destinationPath(`${dest}/build.sh`)
+            this.fs.copyTpl(
+                this.templatePath("./scripts/*"),
+                this.destinationPath(`${dest}/scripts/`),{
+                    projectName: this.options.props.projectName,
+                }
             );
 
-            this.fs.copy(
-                this.templatePath("build.cmd"),
-                this.destinationPath(`${dest}/build.cmd`)
-            );
+
         },
 
 

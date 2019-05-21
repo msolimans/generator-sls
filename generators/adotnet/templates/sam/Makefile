@@ -10,4 +10,23 @@ clean:
 deploy: clean build
 	sls deploy --verbose
 
+local-api: clean build
+	sam local start-api
 
+local-invoke: clean build access
+	./scripts/localinvoke.sh '$(func)' '$(event)' '$(network)'
+
+sam-invoke: clean build access
+	./scripts/samlocal.sh '$(func)' '$(event)' '$(network)'
+
+debug: clean build access
+	./scripts/samdebug.sh '$(func)' '$(event)' '$(network)'
+
+sam-debug: clean build access
+	./scripts/samdebug.sh '$(func)' '$(event)' '$(network)'
+
+undeploy:
+	aws cloudformation delete-stack --stack-name <%=projectName%>
+
+test:
+	go test ./... -cover
