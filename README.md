@@ -9,9 +9,7 @@
 
 Yeoman generator for a lambda Serverless project
 
-![](https://gfycat.com/YoungShockingBirdofparadise)
-
-![](go-pt1.gif)
+![](./assets/go-pt2.gif)
 
 ## Requirements
 
