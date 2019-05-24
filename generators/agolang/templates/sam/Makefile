@@ -36,5 +36,5 @@ sam-debug: clean build access
 undeploy:
 	aws cloudformation delete-stack --stack-name <%=projectName%>
 
-test:
+test: gomodgen
 	go test ./... -cover

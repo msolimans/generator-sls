@@ -42,5 +42,5 @@ sam-debug: sam access
 undeploy:
 	sls undeploy --verbosed
 
-test:
+test: gomodgen
 	go test ./... -cover
