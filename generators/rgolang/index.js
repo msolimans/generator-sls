@@ -1,10 +1,11 @@
 "use strict";
 
+
 const generators = require("yeoman-generator");
 const fileReader = require("html-wiring");
 const frameworks = require("../../common/frameworks");
 const events = require("../../common/methodevents");
-
+const pathhelper = require("../../common/paths");
 
 /**
  * Updates the template.yaml file with the new routes
@@ -133,6 +134,8 @@ const serverGenerator = generators.Base.extend({
 
         routes() {
 
+            const root = ".";
+
             // We get the serverless.yml file as a string
             const path = this.destinationPath(frameworks.getYamlFile(this.options.framework));
             let file = fileReader.readFileAsString(path);
@@ -140,6 +143,12 @@ const serverGenerator = generators.Base.extend({
             const makePath = this.destinationPath("Makefile");
             let makeFile = fileReader.readFileAsString(makePath);
 
+            if (!this.fs.exists(this.destinationPath("apigw"))) {
+                this.fs.copy(
+                    this.templatePath(`${root}/apigw`),
+                    this.destinationPath("apigw")
+                );
+            }
 
             // We process each route
             this.options.routes.forEach((route) => {
@@ -161,13 +170,19 @@ const serverGenerator = generators.Base.extend({
                     );
                 }
 
+                let projName = pathhelper.dirname(process.cwd())[0];
 
-                const root = ".";
+                projName = pathhelper.basename(projName.substring(0, projName.length - 1));
+                const cd = pathhelper.basename(process.cwd());
 
-                this.fs.copy(
+
+                this.fs.copyTpl(
                     this.templatePath(`${root}/main.go`),
-                    this.destinationPath(`${route.slugName}/main.go`)
+                    this.destinationPath(`${route.slugName}/main.go`), {
+                        APIGwPkg: `github.com/${projName}/${cd}/apigw`,
+                    }
                 );
+
 
                 if (this.unitTest === "Testify") {
                     //unit test
