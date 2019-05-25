@@ -6,6 +6,8 @@
 [![](https://img.shields.io/github/languages/count/msolimans/generator-sls.svg)](https://github.com/msolimans/generator-sls/search?l=JSON)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/12d543d7665b42c0b072141276012dd2)](https://www.codacy.com/app/msolimans/generator-sls?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=msolimans/generator-sls&amp;utm_campaign=Badge_Grade)
 [![](https://img.shields.io/gitter/room/generator-sls/community.svg)](https://gitter.im/generator-sls/community#)
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fmsolimans%2FAlgorithms.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2Fmsolimans%2FAlgorithms?ref=badge_shield)
+[![HitCount](http://hits.dwyl.io/msolimans/generator-sls.svg)](http://hits.dwyl.io/msolimans/generator-sls)
 
 Yeoman generator for a lambda Serverless project
 
@@ -35,11 +37,13 @@ npm i -g generator-sls
 
 Once the link established, you can use it right away.
 Create a new directory where you want your project to be and run it:
+
 ```bash
 mkdir lambda-service
 cd lambda-service
 yo sls
 ```
+
 It will prompt some questions you need to answer to configure your project.
 Default values are specified between parenthesis.
 You now have a starter skeleton for a lambda project!
@@ -62,18 +66,18 @@ TODO
 For every route created with the generator, a corresponding basic unit test file is added.
 
 ## Features
-*   Support of SAM 
+*   Support of AWS SAM 
 *   Support of Serverless 
 *   Local Invoke/Debug 
+*   Supports Go 1.11, Python 2.7+, .NET Core 2+, Java 8+
 
 ## Roadmap
-
-*   Support of Go  
-*   Support of NodeJS
-*   Support of Python 
-*   Support of Java 
-*   Support of C# 
-*   Support of different types of events for lambda function  
+*   Support of Go :white_check_mark:  
+*   Support of NodeJS :clock8:
+*   Support of Python :white_check_mark:
+*   Support of Java :white_check_mark:
+*   Support of C# :white_check_mark: 
+*   Support of different types of events for lambda function, 
 *   Simplifying local invoke/debug of lambda or apis (Support of SAM)
 *   Orchestration and support of domains  
 *   Deployment using (Terraform, Amplify, SAM, Apex, or Serverless)
@@ -81,11 +85,10 @@ For every route created with the generator, a corresponding basic unit test file
 *   Choose Unit test framework to be used
 
 ## Resources
-
-*   <https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/serverless-sam-cli-using-debugging-golang.html>
-*   <https://github.com/awslabs/aws-sam-cli/issues/326>
+*   <https://serverless.com>
 *   <https://github.com/awslabs/aws-sam-cli>
-*   <https://github.com/Microsoft/vscode-go/wiki/Debugging-Go-code-using-VS-Code>
 *   <https://github.com/sapessi/serverless-sam>
 *   <https://github.com/awslabs/aws-amplify-serverless-plugin/blob/master/example/serverless.yml>
-*   <https://code.visualstudio.com/docs/editor/variables-reference>
+
+## License
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fmsolimans%2FAlgorithms.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2Fmsolimans%2FAlgorithms?ref=badge_large)
