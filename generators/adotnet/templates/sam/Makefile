@@ -29,4 +29,4 @@ undeploy:
 	aws cloudformation delete-stack --stack-name <%=projectName%>
 
 test:
-	go test ./... -cover
+	dotnet test

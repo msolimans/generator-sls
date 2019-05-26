@@ -43,4 +43,4 @@ undeploy:
 	sls undeploy --verbosed
 
 test: gomodgen
-	go test ./... -cover
+	go test ./... -cover -count 1

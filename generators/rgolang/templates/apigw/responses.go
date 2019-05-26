@@ -70,7 +70,11 @@ func Err(err error, code ...int) (*APIResponse, error) {
 
 //ResponseWithHeaders requires all response data members to be filled in
 func ResponseWithHeaders(data interface{}, code int, headers map[string]string, isBase64 ...bool) (*APIResponse, error) {
-	body, _ := json.Marshal(data)
+	body, err := json.Marshal(data)
+    if err != nil {
+        return Err(err, http.StatusInternalServerError)
+    }
+
 	base64 := false
 	if len(isBase64) > 0 {
 		base64 = isBase64[0]

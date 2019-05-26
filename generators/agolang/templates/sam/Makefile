@@ -12,7 +12,7 @@ clean:
 	rm -rf ./bin ./vendor Gopkg.lock
 
 deploy: clean build
-	sam deploy --template-file packaged-template.yaml --stack-name <%=projectName%> --verbosecd
+	sam deploy --template-file template.yaml --stack-name <%=projectName%>
 
 gomodgen:
 	chmod u+x gomod.sh
@@ -20,6 +20,12 @@ gomodgen:
 
 local-api: clean build
 	sam local start-api
+
+api: clean build
+	sam local start-api
+
+debug-api: clean build
+	./scripts/samdebugapi.sh '$(network)'
 
 local-invoke: clean build access
 	./scripts/localinvoke.sh '$(func)' '$(event)' '$(network)'
@@ -37,4 +43,4 @@ undeploy:
 	aws cloudformation delete-stack --stack-name <%=projectName%>
 
 test: gomodgen
-	go test ./... -cover
+	go test ./... -cover -count 1

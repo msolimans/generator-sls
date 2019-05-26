@@ -1,6 +1,8 @@
 package main
 
 import (
+	"encoding/json"
+	"github.com/aws/aws-lambda-go/events"
 	"testing"
 	"context"
 	"io/ioutil"
@@ -12,20 +14,23 @@ func TestHandler(t *testing.T) {
 
     Convey("Start Testing!", t, func() {
 
-    	raw, err := ioutil.ReadFile("./event.json")
+		Convey("Validating Lambda!", func() {
+			raw, err := ioutil.ReadFile("./event.json")
 
-		Convey("Validating Event!", func() {
 			So(raw, ShouldNotBeNil)
 			So(err, ShouldBeNil)
+
+			req := &events.APIGatewayProxyRequest{}
+			err = json.Unmarshal(raw, req)
+
+			So(err, ShouldBeNil)
+
+			resp, err := Handler(context.Background(), req)
+
+			So(err, ShouldBeNil)
+			So(resp, ShouldNotBeNil)
+			So(resp.StatusCode,ShouldEqual, 200)
 		})
-
-        resp, err := Handler(context.Background(), nil)
-
-        Convey("Validating Results!", func() {
-            So(err, ShouldBeNil)
-            So(resp, ShouldNotBeNil)
-            So(resp.StatusCode,ShouldEqual, 200)
-        })
 
 	})
 }
