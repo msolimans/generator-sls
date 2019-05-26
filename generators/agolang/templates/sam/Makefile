@@ -19,13 +19,13 @@ gomodgen:
 	./gomod.sh
 
 local-api: clean build
-	sam local start-api
+	./scripts/samapi.sh '' '$(network)'
 
-api: clean build
-	sam local start-api
+api: clean build access
+	./scripts/samapi.sh '' '$(network)'
 
-debug-api: clean build
-	./scripts/samdebugapi.sh '$(network)'
+debug-api: clean build access
+	./scripts/samapi.sh 'debug' '$(network)'
 
 local-invoke: clean build access
 	./scripts/localinvoke.sh '$(func)' '$(event)' '$(network)'

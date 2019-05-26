@@ -175,17 +175,13 @@ const serverGenerator = generators.Base.extend({
                 projName = pathhelper.basename(projName.substring(0, projName.length - 1));
                 const cd = pathhelper.basename(process.cwd());
 
-
-
-                    this.fs.copyTpl(
-                        this.templatePath(`${root}/main.go`),
-                        this.destinationPath(`${route.slugName}/main.go`), {
-                            APIGwPkg: `github.com/${projName}/${cd}/apigw`,
-                            method: route.method.toUpperCase()
-                        }
-                    );
-
-
+                this.fs.copyTpl(
+                    this.templatePath(`${root}/main.go`),
+                    this.destinationPath(`${route.slugName}/main.go`), {
+                        APIGwPkg: `github.com/${projName}/${cd}/apigw`,
+                        method: route.method.toUpperCase()
+                    }
+                );
 
                 if (this.unitTest === "Testify") {
                     //unit test

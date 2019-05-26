@@ -25,7 +25,12 @@ sam: build
 	sls sam export --output template.yaml
 
 local-api: sam
-	sam local start-api
+	./scripts/samapi.sh '' '$(network)'
+
+api: local-api
+
+debug-api: sam
+	./scripts/samapi.sh 'debug' '$(network)'
 
 local-invoke: clean build access
 	./scripts/localinvoke.sh '$(func)' '$(event)' '$(network)'
