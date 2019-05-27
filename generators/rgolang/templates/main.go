@@ -34,9 +34,9 @@ func Handler(ctx context.Context, req *events.APIGatewayProxyRequest) (*apigw.AP
 	}
 	<% } %>
 
-    //custom response headers
-	responseHeaders := map[string]string{
-		"Content-Type":           "application/json",
+	//custom response headers
+	responseHeaders := apigw.Headers{
+	    "Content-Type": "application/json",
 		"X-MyCompany-Func-Reply": "world-handler",
 	}
 
