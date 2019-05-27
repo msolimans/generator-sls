@@ -15,7 +15,7 @@ type Headers map[string]string
 
 //Ok returns response data as text and with 200 status code
 func Ok(data interface{}) (*APIResponse, error) {
-	return ResponseWithHeaders(data, http.StatusOK, nil)
+	return ResponseWithHeaders(data, http.StatusOK, Headers{"Content-Type": "text/plain"})
 }
 
 //Json marshals response data into json and returns it with status code 200
