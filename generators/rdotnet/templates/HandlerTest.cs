@@ -11,7 +11,8 @@ namespace <%=ProjectName%>.Tests
         public void Test1()
         {
             <%=Prefix%>Handler handler = new <%=Prefix%>Handler();
-            var response = handler.Run(new <%=Prefix%>Request("key1","key2","key3"));
+            var request = new <%=Prefix%>Request("key1","key2","key3");
+            var response = handler.Run(request);
             Assert.Equal(response.StatusCode, (int) HttpStatusCode.OK);
 
         }

@@ -12,11 +12,12 @@ namespace <%=ProjectName%>
     {
        public APIGatewayProxyResponse Run(<%=Prefix%>Request request)
        {
-         return new APIGatewayProxyResponse
-                   {
-                       Body = JsonConvert.SerializeObject(new <%=Prefix%>Response("Go Serverless v1.0! Your function executed successfully!", request)),
+            var response = new <%=Prefix%>Response("Go Serverless v1.0! Your function executed successfully!", request);
+
+            return new APIGatewayProxyResponse {
+                       Body = JsonConvert.SerializeObject(response),
                          StatusCode = (int) HttpStatusCode.OK,
-                   };
+            };
        }
     }
 
