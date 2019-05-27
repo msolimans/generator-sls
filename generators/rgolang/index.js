@@ -143,6 +143,7 @@ const serverGenerator = generators.Base.extend({
             const makePath = this.destinationPath("Makefile");
             let makeFile = fileReader.readFileAsString(makePath);
 
+            //todo: add this pkg just in case one of the routes is of type api (get, post, put, delete)
             if (!this.fs.exists(this.destinationPath("apigw"))) {
                 this.fs.copy(
                     this.templatePath(`${root}/apigw`),
