@@ -2,7 +2,7 @@
 
 const pathhelper = {
     basename(path) {
-        return path.replace(/.*\//, '');
+        return path.replace(/.*\//, "");
     },
     dirname(path) {
         return path.match(/.*\//);

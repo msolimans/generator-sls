@@ -28,7 +28,7 @@ func Ok(data interface{}) (*APIResponse, error) {
 	}, nil
 }
 
-//ServerErr returns Not Found code, 404
+//NotFound accepts message(s) and returns Not Found status code, 404, with all combined passed message(s)
 func NotFound(message ...string) (*APIResponse, error) {
 	if len(message) > 0 {
 		return Response(strings.Join(message, ","), http.StatusInternalServerError)
