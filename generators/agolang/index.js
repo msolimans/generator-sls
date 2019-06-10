@@ -41,6 +41,7 @@ const serverGenerator = generators.Base.extend({
                     projectVersion: this.options.props.projectVersion,
                     authorName: this.options.props.authorName,
                     authorEmail: this.options.props.authorEmail,
+                    stackName: this.options.props.projectName.toLowerCase(),
                 }
             );
 
