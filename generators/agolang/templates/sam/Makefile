@@ -11,8 +11,8 @@ access:
 clean:
 	rm -rf ./bin ./vendor Gopkg.lock
 
-deploy: clean build
-	sam deploy --template-file template.yaml --stack-name <%=projectName%>
+deploy: access clean build
+	./scripts/samdeploy.sh '<%=stackName%>' '$(region)' '$(profile)'
 
 gomodgen:
 	chmod u+x gomod.sh
@@ -39,8 +39,8 @@ debug: clean build access
 sam-debug: clean build access
 	./scripts/samdebug.sh '$(func)' '$(event)' '$(network)'
 
-undeploy:
-	aws cloudformation delete-stack --stack-name <%=projectName%>
+undeploy: access
+	./scripts/samundeploy.sh
 
 test: gomodgen
 	go test ./... -cover -count 1
