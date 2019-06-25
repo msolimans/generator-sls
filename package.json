@@ -28,7 +28,7 @@
   "devDependencies": {
     "release-it": "*",
     "deep-extend": ">=0.5.1",
-    "eslint": "^3.11.1",
+    "eslint": "^4.18.2",
     "eslint-config-exaprint": "latest",
     "growl": ">=1.10.0",
     "lodash": ">=4.17.5",
