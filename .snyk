@@ -38,3 +38,21 @@ patch:
         patched: '2019-07-04T00:46:17.803Z'
     - yeoman-generator > yeoman-test > yeoman-generator > yeoman-environment > grouped-queue > lodash:
         patched: '2019-07-04T00:46:17.803Z'
+    - snyk > lodash:
+        patched: '2019-08-16T14:53:46.721Z'
+    - snyk > @snyk/dep-graph > lodash:
+        patched: '2019-08-16T14:53:46.721Z'
+    - snyk > inquirer > lodash:
+        patched: '2019-08-16T14:53:46.721Z'
+    - snyk > snyk-config > lodash:
+        patched: '2019-08-16T14:53:46.721Z'
+    - snyk > snyk-nodejs-lockfile-parser > lodash:
+        patched: '2019-08-16T14:53:46.721Z'
+    - snyk > snyk-nuget-plugin > lodash:
+        patched: '2019-08-16T14:53:46.721Z'
+    - snyk > @snyk/dep-graph > graphlib > lodash:
+        patched: '2019-08-16T14:53:46.721Z'
+    - snyk > snyk-go-plugin > graphlib > lodash:
+        patched: '2019-08-16T14:53:46.721Z'
+    - snyk > snyk-nodejs-lockfile-parser > graphlib > lodash:
+        patched: '2019-08-16T14:53:46.721Z'
