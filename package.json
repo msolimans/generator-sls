@@ -23,7 +23,8 @@
     "to-case": "^2.0.0",
     "ucfirst": "^1.0.0",
     "yeoman-generator": "^0.24.1",
-    "yosay": "^1.2.0"
+    "yosay": "^1.2.0",
+    "snyk": "^1.189.0"
   },
   "devDependencies": {
     "release-it": "*",
@@ -58,6 +59,9 @@
   },
   "scripts": {
     "eslint": "eslint . --ext .js",
-    "release": "release-it"
-  }
+    "release": "release-it",
+    "snyk-protect": "snyk protect",
+    "prepare": "npm run snyk-protect"
+  },
+  "snyk": true
 }
