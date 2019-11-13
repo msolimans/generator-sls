@@ -24,7 +24,7 @@
     "ucfirst": "^1.0.0",
     "yeoman-generator": "^0.24.1",
     "yosay": "^1.2.0",
-    "snyk": "^1.230.5"
+    "snyk": "^1.247.1"
   },
   "devDependencies": {
     "release-it": "*",
