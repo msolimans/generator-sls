@@ -4,7 +4,7 @@
     {
       "name": "Connect to Lambda container",
       "type": "go",
-      "request": "launch",
+      "request": "attach",
       "mode": "remote",
       "remotePath": "",
       "port": 8997,
