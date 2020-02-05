@@ -21,25 +21,29 @@ gomodgen:
 	chmod u+x gomod.sh
 	./gomod.sh
 
+local-invoke: clean build access
+	./scripts/localinvoke.sh '$(func)' '$(event)' '$(network)'
+
+invoke: local-invoke
+
+local-debug: clean build access
+	./scripts/localinvoke.sh '$(func)' '$(event)' '$(network)' 'debug'
+
+debug: local-debug 
+
 sam: build
 	sls sam export --output template.yaml
 
-local-api: sam
+sam-api: sam
 	./scripts/samapi.sh '' '$(network)'
 
-api: local-api
+api: sam-api
 
 debug-api: sam
 	./scripts/samapi.sh 'debug' '$(network)'
 
-local-invoke: clean build access
-	./scripts/localinvoke.sh '$(func)' '$(event)' '$(network)'
-
 sam-invoke: sam
 	./scripts/samlocal.sh '$(func)' '$(event)' '$(network)' 'export'
-
-debug: sam access
-	./scripts/samdebug.sh '$(func)' '$(event)' '$(network)' 'export'
 
 sam-debug: sam access
 	./scripts/samdebug.sh '$(func)' '$(event)' '$(network)' 'export'

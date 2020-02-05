@@ -18,23 +18,26 @@ gomodgen:
 	chmod u+x gomod.sh
 	./gomod.sh
 
-local-api: clean build
+local-invoke: clean build access 
+	./scripts/localinvoke.sh '$(func)' '$(event)' '$(network)'
+
+invoke: local-invoke
+
+local-debug: clean build access
+	./scripts/localinvoke.sh '$(func)' '$(event)' '$(network)' 'debug'
+
+debug: local-debug 
+
+sam-api: clean build
 	./scripts/samapi.sh '' '$(network)'
 
-api: clean build access
-	./scripts/samapi.sh '' '$(network)'
+api: sam-api
 
 debug-api: clean build access
 	./scripts/samapi.sh 'debug' '$(network)'
 
-local-invoke: clean build access
-	./scripts/localinvoke.sh '$(func)' '$(event)' '$(network)'
-
 sam-invoke: clean build access
 	./scripts/samlocal.sh '$(func)' '$(event)' '$(network)'
-
-debug: clean build access
-	./scripts/samdebug.sh '$(func)' '$(event)' '$(network)'
 
 sam-debug: clean build access
 	./scripts/samdebug.sh '$(func)' '$(event)' '$(network)'
