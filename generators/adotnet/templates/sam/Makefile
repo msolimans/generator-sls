@@ -20,10 +20,10 @@ sam-invoke: clean build access
 	./scripts/samlocal.sh '$(func)' '$(event)' '$(network)'
 
 debug: clean build access
-	./scripts/samdebug.sh '$(func)' '$(event)' '$(network)'
+	./scripts/samlocal.sh '$(func)' '$(event)' '$(network)' 'export' '$(env)' 'debug'
 
 sam-debug: clean build access
-	./scripts/samdebug.sh '$(func)' '$(event)' '$(network)'
+	./scripts/samlocal.sh '$(func)' '$(event)' '$(network)' 'export' '$(env)' 'debug'
 
 undeploy:
 	aws cloudformation delete-stack --stack-name <%=projectName%>

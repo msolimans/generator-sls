@@ -32,7 +32,7 @@ local-debug: clean build access
 debug: local-debug 
 
 sam: build
-	sls sam export --output template.yaml
+	if [ -z "$(env)" ]; then sls sam export --output template.yaml; else sls sam export --output template.yaml  --stage=$(env); fi;
 
 sam-api: sam
 	./scripts/samapi.sh '' '$(network)'
@@ -43,10 +43,10 @@ debug-api: sam
 	./scripts/samapi.sh 'debug' '$(network)'
 
 sam-invoke: sam
-	./scripts/samlocal.sh '$(func)' '$(event)' '$(network)' 'export'
+	./scripts/samlocal.sh '$(func)' '$(event)' '$(network)' 'export' '$(env)'
 
 sam-debug: sam access
-	./scripts/samdebug.sh '$(func)' '$(event)' '$(network)' 'export'
+	./scripts/samlocal.sh '$(func)' '$(event)' '$(network)' 'export' '$(env)' 'debug'
 
 undeploy:
 	sls undeploy --verbosed

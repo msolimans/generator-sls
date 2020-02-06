@@ -58,15 +58,26 @@ const serverGenerator = generators.Base.extend({
 
     writing: {
         build() {
-           
             this.composeWith(`sls:a${this.language}`, {options: {props: this}});
         }
     },
     scripts() {
-        this.fs.copy(
+
+        this.fs.copyTpl(
             this.templatePath("./../../app/templates/scripts"),
-            this.destinationPath("scripts")
+            this.destinationPath("scripts"), {
+                projectName: this.projectName
+            }
         );
+
+        this.fs.copy(
+            this.templatePath("./../../app/templates/linux"),
+            this.destinationPath("scripts/linux"));
+
+        this.fs.copy(
+            this.templatePath("./../../../common/configs"),
+            this.destinationPath("configs"));
+
     },
 
     end() {
