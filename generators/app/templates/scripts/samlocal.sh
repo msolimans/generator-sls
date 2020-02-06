@@ -23,9 +23,6 @@ if [[ -z "$env" ]]; then
 fi
 
 func="$(tr '[:lower:]' '[:upper:]' <<< ${1:0:1})${1:1}"
-echo $env
-echo $func
-echo $proj
 
 network=""
 event="$1/event.json"
@@ -39,7 +36,11 @@ fi
 
 #handle exported sam naming diffs
 if [[ ! -z "$4" ]]; then
-    func="${proj}${env}${func}"
+    echo "export mode on"
+    func="${proj}${env}${func}" #export mode
+else 
+    echo "direct sam call, adding suffix Function"
+    func="${func}Function" #not export mode
 fi
 
 callfn() {

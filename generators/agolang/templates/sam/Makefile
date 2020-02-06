@@ -37,10 +37,10 @@ debug-api: clean build access
 	./scripts/samapi.sh 'debug' '$(network)'
 
 sam-invoke: clean build access
-	./scripts/samlocal.sh '$(func)' '$(event)' '$(network)' 'export' '$(env)'
+	./scripts/samlocal.sh '$(func)' '$(event)' '$(network)' '' '$(env)'
 
 sam-debug: clean build access
-	./scripts/samlocal.sh '$(func)' '$(event)' '$(network)' 'export' '$(env)' 'debug'
+	./scripts/samlocal.sh '$(func)' '$(event)' '$(network)' '' '$(env)' 'debug'
 
 undeploy: access
 	./scripts/samundeploy.sh
