@@ -1,0 +1,7 @@
+{
+  "env": "dev",
+  "memory": 128,
+  "role": "",
+  "region": "us-east-1",
+  "tags": ["Serverless"]
+}
