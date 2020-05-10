@@ -3,9 +3,9 @@
 
 const generators = require("yeoman-generator");
 const fileReader = require("html-wiring");
+const pathUtil = require("path");
 const frameworks = require("../../common/frameworks");
 const events = require("../../common/methodevents");
-const pathhelper = require("../../common/paths");
 
 /**
  * Updates the template.yaml file with the new routes
@@ -171,10 +171,10 @@ const serverGenerator = generators.Base.extend({
                     );
                 }
 
-                let projName = pathhelper.dirname(process.cwd())[0];
+                let projName = pathUtil.dirname(process.cwd());
 
-                projName = pathhelper.basename(projName.substring(0, projName.length - 1));
-                const cd = pathhelper.basename(process.cwd());
+                projName = pathUtil.basename(projName);
+                const cd = pathUtil.basename(process.cwd());
 
                 this.fs.copyTpl(
                     this.templatePath(`${root}/main.go`),
