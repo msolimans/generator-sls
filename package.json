@@ -22,7 +22,7 @@
     "html-wiring": "^1.2.0",
     "to-case": "^2.0.0",
     "ucfirst": "^1.0.0",
-    "yeoman-generator": "^0.24.1",
+    "yeoman-generator": "^2.0.3",
     "yosay": "^1.2.0",
     "snyk": "^1.258.2"
   },
