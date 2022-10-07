@@ -1,5 +1,5 @@
 # Snyk (https://snyk.io) policy file, patches or ignores known vulnerabilities.
-version: v1.14.0
+version: v1.25.0
 ignore: {}
 # patches apply the minimum changes required to fix a vulnerability
 patch:
@@ -64,3 +64,77 @@ patch:
   SNYK-JS-TREEKILL-536781:
     - snyk > snyk-sbt-plugin > tree-kill:
         patched: '2019-12-12T00:46:30.639Z'
+  SNYK-JS-LODASH-567746:
+    - yeoman-generator > lodash:
+        patched: '2022-10-07T20:32:53.600Z'
+    - snyk > @snyk/dep-graph > lodash:
+        patched: '2022-10-07T20:32:53.600Z'
+    - yeoman-generator > async > lodash:
+        patched: '2022-10-07T20:32:53.600Z'
+    - yeoman-generator > gruntfile-editor > lodash:
+        patched: '2022-10-07T20:32:53.600Z'
+    - yeoman-generator > yeoman-environment > lodash:
+        patched: '2022-10-07T20:32:53.600Z'
+    - yeoman-generator > yeoman-test > lodash:
+        patched: '2022-10-07T20:32:53.600Z'
+    - snyk > @snyk/snyk-cocoapods-plugin > @snyk/dep-graph > lodash:
+        patched: '2022-10-07T20:32:53.600Z'
+    - snyk > snyk-nuget-plugin > dotnet-deps-parser > lodash:
+        patched: '2022-10-07T20:32:53.600Z'
+    - yeoman-generator > gruntfile-editor > ast-query > lodash:
+        patched: '2022-10-07T20:32:53.600Z'
+    - yeoman-generator > yeoman-environment > grouped-queue > lodash:
+        patched: '2022-10-07T20:32:53.600Z'
+    - yeoman-generator > yeoman-environment > inquirer > lodash:
+        patched: '2022-10-07T20:32:53.600Z'
+    - yeoman-generator > yeoman-test > inquirer > lodash:
+        patched: '2022-10-07T20:32:53.600Z'
+    - yeoman-generator > yeoman-test > yeoman-environment > lodash:
+        patched: '2022-10-07T20:32:53.600Z'
+    - yeoman-generator > yeoman-test > yeoman-generator > lodash:
+        patched: '2022-10-07T20:32:53.600Z'
+    - snyk > @snyk/snyk-cocoapods-plugin > @snyk/cocoapods-lockfile-parser > @snyk/ruby-semver > lodash:
+        patched: '2022-10-07T20:32:53.600Z'
+    - yeoman-generator > yeoman-test > yeoman-generator > async > lodash:
+        patched: '2022-10-07T20:32:53.600Z'
+    - yeoman-generator > yeoman-test > yeoman-environment > grouped-queue > lodash:
+        patched: '2022-10-07T20:32:53.600Z'
+    - yeoman-generator > yeoman-test > yeoman-environment > inquirer > lodash:
+        patched: '2022-10-07T20:32:53.600Z'
+    - yeoman-generator > yeoman-test > yeoman-generator > yeoman-environment > lodash:
+        patched: '2022-10-07T20:32:53.600Z'
+    - yeoman-generator > yeoman-test > yeoman-generator > yeoman-environment > grouped-queue > lodash:
+        patched: '2022-10-07T20:32:53.600Z'
+    - yeoman-generator > yeoman-test > yeoman-generator > yeoman-environment > inquirer > lodash:
+        patched: '2022-10-07T20:32:53.600Z'
+    - snyk > lodash:
+        patched: '2022-10-07T20:32:53.600Z'
+    - snyk > inquirer > lodash:
+        patched: '2022-10-07T20:32:53.600Z'
+    - snyk > snyk-config > lodash:
+        patched: '2022-10-07T20:32:53.600Z'
+    - snyk > snyk-mvn-plugin > lodash:
+        patched: '2022-10-07T20:32:53.600Z'
+    - snyk > snyk-nodejs-lockfile-parser > lodash:
+        patched: '2022-10-07T20:32:53.600Z'
+    - snyk > snyk-nuget-plugin > lodash:
+        patched: '2022-10-07T20:32:53.600Z'
+    - snyk > @snyk/dep-graph > graphlib > lodash:
+        patched: '2022-10-07T20:32:53.600Z'
+    - snyk > snyk-go-plugin > graphlib > lodash:
+        patched: '2022-10-07T20:32:53.600Z'
+    - snyk > snyk-nodejs-lockfile-parser > graphlib > lodash:
+        patched: '2022-10-07T20:32:53.600Z'
+    - snyk > snyk-php-plugin > @snyk/composer-lockfile-parser > lodash:
+        patched: '2022-10-07T20:32:53.600Z'
+    - snyk > @snyk/snyk-cocoapods-plugin > @snyk/dep-graph > graphlib > lodash:
+        patched: '2022-10-07T20:32:53.600Z'
+    - snyk > @snyk/snyk-cocoapods-plugin > @snyk/cocoapods-lockfile-parser > @snyk/dep-graph > graphlib > lodash:
+        patched: '2022-10-07T20:32:53.600Z'
+    - snyk > @snyk/snyk-cocoapods-plugin > @snyk/cocoapods-lockfile-parser > @snyk/dep-graph > lodash:
+        patched: '2022-10-07T20:32:53.600Z'
+  'npm:lodash:20180130':
+    - html-wiring > cheerio > lodash:
+        patched: '2022-10-07T20:32:53.600Z'
+    - yeoman-generator > html-wiring > cheerio > lodash:
+        patched: '2022-10-07T20:32:53.600Z'
