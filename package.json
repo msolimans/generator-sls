@@ -22,9 +22,9 @@
     "html-wiring": "^1.2.0",
     "to-case": "^2.0.0",
     "ucfirst": "^1.0.0",
-    "yeoman-generator": "^0.24.1",
-    "yosay": "^1.2.0",
-    "snyk": "^1.258.2"
+    "yeoman-generator": "^4.11.0",
+    "yosay": "^2.0.0",
+    "@snyk/protect": "latest"
   },
   "devDependencies": {
     "release-it": "*",
@@ -60,7 +60,7 @@
   "scripts": {
     "eslint": "eslint . --ext .js",
     "release": "release-it",
-    "snyk-protect": "snyk protect",
+    "snyk-protect": "snyk-protect",
     "prepare": "npm run snyk-protect"
   },
   "snyk": true
